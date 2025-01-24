@@ -40,7 +40,8 @@ const localization = merge({}, translationResources, {
   'pt-BR': { translation: ptBr },
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedLedgers = indyLedgers.filter((ledger: any) => ledger.indyNamespace !== 'indicio')
+//const selectedLedgers = indyLedgers.filter((ledger: any) => ledger.indyNamespace !== 'indicio')
+const selectedLedgers = indyLedgers.filter((ledger: any) => ledger.indyNamespace == 'bcovrin:test')
 const configuration: ConfigurationContext = {
   ...defaultConfiguration,
   pages,
