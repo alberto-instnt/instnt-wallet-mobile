@@ -3,10 +3,54 @@ new file mode 100644
 index 0000000..1c3acdb
 Binary files /dev/null and b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/the-wallet-picture_2.png differ
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx b/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
-index b7ec464..e05c7d8 100644
+index b7ec464..3ebcdaf 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
 +++ b/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
-@@ -352,8 +352,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -133,6 +133,10 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+   }
+ 
+   const styles = StyleSheet.create({
++     imgBackground: {
++      flexGrow: 1,
++      height: width / 2.1,
++    },
+     container: {
+       backgroundColor: overlay.brandingOverlay?.primaryBackgroundColor,
+       borderRadius: borderRadius,
+@@ -148,6 +152,12 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+       backgroundColor: getSecondaryBackgroundColor() ?? overlay.brandingOverlay?.primaryBackgroundColor,
+     },
+     primaryBodyContainer: {
++      flex: 1,
++      top: padding+30,
++      padding,
++    },
++
++    primaryProofBodyContainer: {
+       flex: 1,
+       padding,
+       marginLeft: -1 * logoHeight + padding,
+@@ -194,12 +204,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+       minHeight: ListItems.recordAttributeText.fontSize,
+       paddingVertical: 4,
+     },
+-    textContainer: {
++     textProofContainer: {
+       color: proof
+         ? TextTheme.normal.color
+         : credentialTextColor(ColorPallet, overlay.brandingOverlay?.primaryBackgroundColor),
+       flexShrink: 1,
+     },
++    textContainer: {
++      color: proof
++        ? TextTheme.normal.color
++         : '#000',
++      flexShrink: 1,
++    },
+     errorText: {
+       ...TextTheme.normal,
+       color: ListItems.proofError.color,
+@@ -352,8 +368,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
@@ -26,6 +70,142 @@ index b7ec464..e05c7d8 100644
  
      return (
        <Text
+@@ -515,6 +541,83 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+     )
+   }
+ 
++  const CredentialCardPrimaryBodyProof: React.FC = () => {
++    return (
++      <View testID={testIdWithKey('CredentialCardPrimaryBody')} style={styles.primaryProofBodyContainer}>
++        <View>
++          {!(overlay.metaOverlay?.issuer === 'Unknown Contact' && proof) && (
++            <View style={{ flexDirection: 'row' }}>
++              <Text
++                testID={testIdWithKey('CredentialIssuer')}
++                style={[
++                  TextTheme.label,
++                  styles.textContainer,
++                  {
++                    lineHeight: 19,
++                    opacity: 0.8,
++                    flex: 1,
++                    flexWrap: 'wrap',
++                  },
++                ]}
++              >
++                {overlay.metaOverlay?.issuer}
++              </Text>
++            </View>
++          )}
++          <View style={{ flexDirection: 'row' }}>
++            <Text
++              testID={testIdWithKey('CredentialName')}
++              style={[
++                TextTheme.bold,
++                styles.textContainer,
++                {
++                  lineHeight: 24,
++                  flex: 1,
++                  flexWrap: 'wrap',
++                  color: allPI && proof ? ColorPallet.notification.warnText : styles.textContainer.color,
++                },
++              ]}
++            >
++              {overlay.metaOverlay?.name}
++            </Text>
++          </View>
++        </View>
++        {(error || isProofRevoked) && (
++          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
++            <Icon style={[styles.errorIcon]} name="close" size={30} />
++
++            <Text style={[styles.errorText]} testID={testIdWithKey('RevokedOrNotAvailable')} numberOfLines={1}>
++              {error ? t('ProofRequest.NotAvailableInYourWallet') : t('CredentialDetails.Revoked')}
++            </Text>
++          </View>
++        )}
++        <FlatList
++          data={cardData}
++          scrollEnabled={false}
++          initialNumToRender={cardData?.length}
++          renderItem={({ item }) => {
++            return renderCardAttribute(item as Attribute & Predicate)
++          }}
++          ListFooterComponent={
++            hasAltCredentials && handleAltCredChange ? (
++              <CredentialActionFooter
++                onPress={handleAltCredChange}
++                text={t('ProofRequest.ChangeCredential')}
++                testID={'ChangeCredential'}
++              />
++            ) : error && helpAction ? (
++              <CredentialActionFooter
++                onPress={helpAction}
++                text={t('ProofRequest.GetThisCredential')}
++                testID={'GetThisCredential'}
++              />
++            ) : null
++          }
++        />
++      </View>
++    )
++  }
++
+   const CredentialCardSecondaryBody: React.FC = () => {
+     return (
+       <View
+@@ -600,7 +703,7 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+     )
+   }
+ 
+-  const CredentialCard: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
++   const CredentialCardProof: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
+     return (
+       <View
+         style={styles.cardContainer}
+@@ -619,6 +722,31 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+       >
+         <CredentialCardSecondaryBody />
+         <CredentialCardLogo />
++        <CredentialCardPrimaryBodyProof />
++        <CredentialCardStatus status={status} />
++      </View>
++    )
++  }
++
++  const CredentialCard: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
++    return (
++      <View
++        style={styles.cardContainer}
++        accessible={true}
++        accessibilityLabel={
++          `${overlay.metaOverlay?.issuer ? `${t('Credentials.IssuedBy')} ${overlay.metaOverlay?.issuer}` : ''}, ${
++            overlay.metaOverlay?.watermark ?? ''
++          } ${overlay.metaOverlay?.name ?? ''} ${t('Credentials.Credential')}.` +
++          cardData.map((item) => {
++            const { label, value } = parseAttribute(item as (Attribute & Predicate) | undefined)
++            if (label && value) {
++              return ` ${label}, ${value}`
++            }
++          })
++        }
++      >
++        {/* <CredentialCardSecondaryBody />
++        <CredentialCardLogo /> */}
+         <CredentialCardPrimaryBody />
+         <CredentialCardStatus status={status} />
+       </View>
+@@ -657,7 +785,9 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+               watermark={overlay.metaOverlay?.watermark}
+             />
+           )}
+-          <CredentialCard status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} />
++          {proof ? <CredentialCardProof status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} /> : <ImageBackground source={require('../../assets/img/the-wallet-picture_2.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}>
++            <CredentialCard status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} />
++          </ImageBackground>}
+         </View>
+       </TouchableOpacity>
+     </View>
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx b/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx
 index abf013e..50b247a 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx
@@ -113,6 +293,53 @@ index 47e578b..58b9013 100644
    }, [isFocused, connection, store.preferences.alternateContactNames])
  
    useMemo(() => {
+diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
+index cd71764..1a89058 100644
+--- a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
++++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
+@@ -66,8 +66,14 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
+   })
+   const credentialConnectionLabel = getCredentialConnectionLabel(credential)
+   const { width, height } = useWindowDimensions()
++  const borderRadius = 10
+ 
+   const styles = StyleSheet.create({
++    imgBackground: {
++      top:0,
++      flexGrow: 1,
++      height: width / 2.1,
++    },
+     container: {
+       backgroundColor: overlay.brandingOverlay?.primaryBackgroundColor,
+       display: 'flex',
+@@ -318,9 +324,11 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
+       </View>
+     ) : (
+       <View style={styles.container}>
+-        <CredentialDetailSecondaryHeader />
+-        <CredentialCardLogo />
+-        <CredentialDetailPrimaryHeader />
++        {/* <CredentialDetailSecondaryHeader />
++        <CredentialCardLogo /> */}
++        {/* <CredentialDetailPrimaryHeader /> */}
++        <ImageBackground source={require('../../App/assets/img/the-wallet-picture_2.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}>
++        </ImageBackground>
+ 
+         {isRevoked && !isRevokedMessageHidden ? (
+           <View style={{ padding: paddingVertical, paddingTop: 0 }}>
+diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx
+index 25ad0c0..16d70ad 100644
+--- a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx
++++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx
+@@ -191,7 +191,7 @@ const CredentialOffer: React.FC<CredentialOfferProps> = ({ navigation, route })
+   const header = () => {
+     return (
+       <>
+-        <ConnectionImage connectionId={credential?.connectionId} />
++        {/* <ConnectionImage connectionId={credential?.connectionId} /> */}
+         <View style={styles.headerTextContainer}>
+           <Text style={styles.headerText} testID={testIdWithKey('HeaderText')}>
+             <Text>{credentialConnectionLabel || t('ContactDetails.AContact')}</Text>{' '}
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx
 index 68de9ff..7a1e165 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx
@@ -125,6 +352,19 @@ index 68de9ff..7a1e165 100644
    const { ColorPallet } = useTheme()
    const [store, dispatch] = useStore()
    const { start } = useTour()
+diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx
+index d0e753a..ae5ec60 100644
+--- a/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx
++++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx
+@@ -430,7 +430,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
+           </View>
+         ) : (
+           <>
+-            <ConnectionImage connectionId={proof?.connectionId} />
++            {/* <ConnectionImage connectionId={proof?.connectionId} /> */}
+             <View style={styles.headerTextContainer}>
+               {!hasSatisfiedPredicates(getCredentialsFields()) ? (
+                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts b/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
 index 9a0682d..49ca38b 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
