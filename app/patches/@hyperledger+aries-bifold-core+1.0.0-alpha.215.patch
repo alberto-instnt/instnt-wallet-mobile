@@ -275,24 +275,6 @@ index 6b6fcc1..ddcc3e1 100644
    }
  ]
 \ No newline at end of file
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/Chat.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/Chat.tsx
-index 47e578b..58b9013 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/screens/Chat.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/Chat.tsx
-@@ -61,11 +61,11 @@ const Chat: React.FC<ChatProps> = ({ route }) => {
-   const [showActionSlider, setShowActionSlider] = useState(false)
-   const { ChatTheme: theme, Assets } = useTheme()
-   const { ColorPallet } = useTheme()
--  const [theirLabel, setTheirLabel] = useState(getConnectionName(connection, store.preferences.alternateContactNames))
-+  const [theirLabel, setTheirLabel] = useState(getConnectionName(connection, store.preferences.alternateContactNames)?.replace(/\d$/, ""))
- 
-   // This useEffect is for properly rendering changes to the alt contact name, useMemo did not pick them up
-   useEffect(() => {
--    setTheirLabel(getConnectionName(connection, store.preferences.alternateContactNames))
-+    setTheirLabel(getConnectionName(connection, store.preferences.alternateContactNames)?.replace(/\d$/, ""))
-   }, [isFocused, connection, store.preferences.alternateContactNames])
- 
-   useMemo(() => {
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
 index cd71764..1a89058 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
@@ -366,7 +348,7 @@ index d0e753a..ae5ec60 100644
                {!hasSatisfiedPredicates(getCredentialsFields()) ? (
                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts b/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
-index 9a0682d..49ca38b 100644
+index 9a0682d..a5c7849 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
 +++ b/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
 @@ -227,13 +227,9 @@ export function getConnectionName(
@@ -381,7 +363,7 @@ index 9a0682d..49ca38b 100644
 -    ''
 -  )
 +  const label = (connection?.id && alternateContactNames[connection?.id]) || connection?.theirLabel || connection?.alias || connection?.id || '';
-+  const updatedLabel = label?.replace(/\d$/, "");
++  const updatedLabel = label;
 +  return updatedLabel;
  }
  
@@ -392,7 +374,7 @@ index 9a0682d..49ca38b 100644
      const connection = useConnectionById(credential.connectionId)
 -    return connection?.alias || connection?.theirLabel || credential.connectionId
 +    const connectionLabel = connection?.alias || connection?.theirLabel || credential.connectionId
-+    const updatedConnectionLabel = connectionLabel?.replace(/\d$/, "");
++    const updatedConnectionLabel = connectionLabel;
 +    return updatedConnectionLabel;
    }
  
