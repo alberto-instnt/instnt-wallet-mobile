@@ -49,11 +49,11 @@ const translation = {
   },
   "Onboarding": {
     "InstntHeading": "AcmeBank",
-    "InstntFirstParagraph": "Instnt (www.instnt.org) is a managed customer acceptance platform for businesses that want to make it easy for customers to signup and be accepted and onboarded.",
+    "InstntFirstParagraph": "Welcome to Acmebank's mobile app. It includes an identity wallet to store your passes.",
     "InstntMultipassHeading": "Instnt Multipass",
     "InstntMultipassParagraph": "Instnt Multipass (tm) allows you to signup and be accepted by businesses with one click or a scan of a QR-code. Signup once for a product or service of a business with Instnt, get verified, and potentially never signup again as you access other products or services from the same business or other businesses. Instnt uses advanced block-chain based decentralized identity technology and verifiable credential standards to make single signup possible.",
     "PrivateConfidentialHeading": "What is decentralized identity and verifiable credential?",
-    "PrivateConfidentialParagraph": "Instnt makes it possible for businesses to trust that you were verified in a reliable way for KYC compliance and fraud prevention and to share that trust using secure, managed blockchain-based technology, in a decentralized manner. \n\nWith verifiable credential and embedded toolkit technology you end up owning your own identity data and the proof that that data was verified (and who verified it) in a the form of digital  credentials, much like your driver license in a physical wallet. Your data is securely encrypted and stored in your wallet so it can never be stolen by data breaches at businesses.",
+    "PrivateConfidentialParagraph": "Multipass makes it possible for businesses to trust that you were verified in a reliable way for KYC compliance and fraud prevention and to share that trust using secure, managed blockchain-based technology, in a decentralized manner. \n\nWith verifiable credential and embedded toolkit technology you end up owning your own identity data and the proof that that data was verified (and who verified it) in a the form of digital  credentials, much like your driver license in a physical wallet. Your data is securely encrypted and stored in your wallet so it can never be stolen by data breaches at businesses.",
     "GetStarted": "Get Started",
   },
   "Preface": {

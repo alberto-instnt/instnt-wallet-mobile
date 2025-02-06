@@ -108,47 +108,49 @@ const StartPage = (theme: ITheme['OnboardingTheme']) => {
   )
 }
 
-const guides: Array<{
-  image: React.FC<SvgProps>
-  title: string
-  body: string
-}> = [
-  {
-    image: CredentialList,
-    title: 'Onboarding.InstntMultipassHeading',
-    body: 'Onboarding.InstntMultipassParagraph',
-  },
-]
+/** Use of multipass screen */
 
-const CreatePageWith = (image: React.FC<SvgProps>, title: string, body: string, theme: ITheme['OnboardingTheme']) => {
-  const { t } = useTranslation()
-  const defaultStyle = createStyles(theme)
-  const imageDisplayOptions = {
-    fill: theme.imageDisplayOptions.fill,
-    height: 180,
-    width: 180,
-  }
-  const styles = StyleSheet.create({
-    imageContainer: {
-      alignItems: 'center',
-      marginBottom: 10,
-    },
-  })
-  return (
-    <ScrollView style={{ padding: 20 }}>
-      <View style={styles.imageContainer}>{image(imageDisplayOptions)}</View>
-      <View style={{ marginBottom: 20 }}>
-        <Text style={[defaultStyle.headerText]}>{t(title)}</Text>
-        <Text style={[defaultStyle.bodyText, { marginTop: 25 }]}>{t(body)}</Text>
-      </View>
-    </ScrollView>
-  )
-}
+// const guides: Array<{
+//   image: React.FC<SvgProps>
+//   title: string
+//   body: string
+// }> = [
+//   {
+//     image: CredentialList,
+//     title: 'Onboarding.InstntMultipassHeading',
+//     body: 'Onboarding.InstntMultipassParagraph',
+//   },
+// ]
+
+// const CreatePageWith = (image: React.FC<SvgProps>, title: string, body: string, theme: ITheme['OnboardingTheme']) => {
+//   const { t } = useTranslation()
+//   const defaultStyle = createStyles(theme)
+//   const imageDisplayOptions = {
+//     fill: theme.imageDisplayOptions.fill,
+//     height: 180,
+//     width: 180,
+//   }
+//   const styles = StyleSheet.create({
+//     imageContainer: {
+//       alignItems: 'center',
+//       marginBottom: 10,
+//     },
+//   })
+//   return (
+//     <ScrollView style={{ padding: 20 }}>
+//       <View style={styles.imageContainer}>{image(imageDisplayOptions)}</View>
+//       <View style={{ marginBottom: 20 }}>
+//         <Text style={[defaultStyle.headerText]}>{t(title)}</Text>
+//         <Text style={[defaultStyle.bodyText, { marginTop: 25 }]}>{t(body)}</Text>
+//       </View>
+//     </ScrollView>
+//   )
+// }
 
 export const pages = (onTutorialCompleted: GenericFn, theme: ITheme): Array<Element> => {
   return [
     StartPage(theme),
-    ...guides.map((g) => CreatePageWith(g.image, g.title, g.body, theme)),
+    //...guides.map((g) => CreatePageWith(g.image, g.title, g.body, theme)),
     EndPage(onTutorialCompleted, theme),
   ]
 }
