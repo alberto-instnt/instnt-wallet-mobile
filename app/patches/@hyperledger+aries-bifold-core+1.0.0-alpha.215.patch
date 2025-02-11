@@ -2,22 +2,40 @@ diff --git a/node_modules/@hyperledger/aries-bifold-core/App/assets/img/the-wall
 new file mode 100644
 index 0000000..1c3acdb
 Binary files /dev/null and b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/the-wallet-picture_2.png differ
+diff --git a/node_modules/@hyperledger/aries-bifold-core/App/assets/img/wallet_new.png b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/wallet_new.png
+new file mode 100644
+index 0000000..e0253e1
+Binary files /dev/null and b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/wallet_new.png differ
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx b/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
-index b7ec464..3ebcdaf 100644
+index b7ec464..e90f3f9 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
 +++ b/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
-@@ -133,6 +133,10 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -133,14 +133,24 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
    }
  
    const styles = StyleSheet.create({
 +     imgBackground: {
 +      flexGrow: 1,
 +      height: width / 2.1,
++      minWidth: width - 60
 +    },
      container: {
        backgroundColor: overlay.brandingOverlay?.primaryBackgroundColor,
        borderRadius: borderRadius,
-@@ -148,6 +152,12 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
++      //marginLeft: -8
+     },
+     cardContainer: {
+       flexDirection: 'row',
+       minHeight: 0.33 * width,
+     },
++    cardProofContainer: {
++      flexDirection: 'column',
++      minHeight: 0.33 * width,
++    },
+     secondaryBodyContainer: {
+       width: logoHeight,
+       borderTopLeftRadius: borderRadius,
+@@ -148,9 +158,15 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
        backgroundColor: getSecondaryBackgroundColor() ?? overlay.brandingOverlay?.primaryBackgroundColor,
      },
      primaryBodyContainer: {
@@ -29,8 +47,12 @@ index b7ec464..3ebcdaf 100644
 +    primaryProofBodyContainer: {
        flex: 1,
        padding,
-       marginLeft: -1 * logoHeight + padding,
-@@ -194,12 +204,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+-      marginLeft: -1 * logoHeight + padding,
++      marginLeft: -0.8 * logoHeight + padding,
+     },
+     imageAttr: {
+       height: 150,
+@@ -194,12 +210,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
        minHeight: ListItems.recordAttributeText.fontSize,
        paddingVertical: 4,
      },
@@ -50,7 +72,7 @@ index b7ec464..3ebcdaf 100644
      errorText: {
        ...TextTheme.normal,
        color: ListItems.proofError.color,
-@@ -352,8 +368,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -352,8 +374,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
@@ -70,7 +92,7 @@ index b7ec464..3ebcdaf 100644
  
      return (
        <Text
-@@ -515,6 +541,83 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -515,6 +547,83 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
@@ -154,29 +176,14 @@ index b7ec464..3ebcdaf 100644
    const CredentialCardSecondaryBody: React.FC = () => {
      return (
        <View
-@@ -600,7 +703,7 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -600,6 +709,32 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
--  const CredentialCard: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
 +   const CredentialCardProof: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
-     return (
-       <View
-         style={styles.cardContainer}
-@@ -619,6 +722,31 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
-       >
-         <CredentialCardSecondaryBody />
-         <CredentialCardLogo />
-+        <CredentialCardPrimaryBodyProof />
-+        <CredentialCardStatus status={status} />
-+      </View>
-+    )
-+  }
-+
-+  const CredentialCard: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
 +    return (
 +      <View
-+        style={styles.cardContainer}
++        style={styles.cardProofContainer}
 +        accessible={true}
 +        accessibilityLabel={
 +          `${overlay.metaOverlay?.issuer ? `${t('Credentials.IssuedBy')} ${overlay.metaOverlay?.issuer}` : ''}, ${
@@ -192,15 +199,33 @@ index b7ec464..3ebcdaf 100644
 +      >
 +        {/* <CredentialCardSecondaryBody />
 +        <CredentialCardLogo /> */}
++        <ImageBackground source={require('../../assets/img/wallet_new.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}/>
++        <CredentialCardPrimaryBodyProof />
++        <CredentialCardStatus status={status} />
++      </View>
++    )
++  }
++
+   const CredentialCard: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
+     return (
+       <View
+@@ -617,8 +752,8 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+           })
+         }
+       >
+-        <CredentialCardSecondaryBody />
+-        <CredentialCardLogo />
++        {/* <CredentialCardSecondaryBody />
++        <CredentialCardLogo /> */}
          <CredentialCardPrimaryBody />
          <CredentialCardStatus status={status} />
        </View>
-@@ -657,7 +785,9 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -657,7 +792,9 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
                watermark={overlay.metaOverlay?.watermark}
              />
            )}
 -          <CredentialCard status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} />
-+          {proof ? <CredentialCardProof status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} /> : <ImageBackground source={require('../../assets/img/the-wallet-picture_2.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}>
++          {proof ? <CredentialCardProof status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} /> : <ImageBackground source={require('../../assets/img/wallet_new.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}>
 +            <CredentialCard status={isRevoked ? 'error' : allPI && proof ? 'warn' : undefined} />
 +          </ImageBackground>}
          </View>
@@ -276,7 +301,7 @@ index 6b6fcc1..ddcc3e1 100644
  ]
 \ No newline at end of file
 diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
-index cd71764..1a89058 100644
+index cd71764..3f69fcc 100644
 --- a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
 +++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
 @@ -66,8 +66,14 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
@@ -304,7 +329,7 @@ index cd71764..1a89058 100644
 +        {/* <CredentialDetailSecondaryHeader />
 +        <CredentialCardLogo /> */}
 +        {/* <CredentialDetailPrimaryHeader /> */}
-+        <ImageBackground source={require('../../App/assets/img/the-wallet-picture_2.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}>
++        <ImageBackground source={require('../../App/assets/img/wallet_new.png')} style={styles.imgBackground} imageStyle={{ borderRadius }}>
 +        </ImageBackground>
  
          {isRevoked && !isRevokedMessageHidden ? (
