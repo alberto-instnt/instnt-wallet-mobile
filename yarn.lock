@@ -4529,9 +4529,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/.yarn/patches/@hyperledger-aries-bifold-core-npm-1.0.0-alpha.215-abb2ca6d59.patch":
+"@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/app/patches/@hyperledger+aries-bifold-core+1.0.0-alpha.215.patch":
   version: 1.0.0-alpha.215
-  resolution: "@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/.yarn/patches/@hyperledger-aries-bifold-core-npm-1.0.0-alpha.215-abb2ca6d59.patch::version=1.0.0-alpha.215&hash=2caf93"
+  resolution: "@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/app/patches/@hyperledger+aries-bifold-core+1.0.0-alpha.215.patch::version=1.0.0-alpha.215&hash=b60f0d"
   peerDependencies:
     "@aries-framework/anoncreds": ^0.4.0
     "@aries-framework/anoncreds-rs": ^0.4.0
@@ -4603,7 +4603,7 @@ __metadata:
     uuid: ^9.0.0
   bin:
     bifold: bin/bifold
-  checksum: 4367c5a1bcba86e4c2de2ea8016f8bd1e17e399327469a01527e4e949e0286aa008df2bc6377f58b4ebf5d1306f758450d33a42fb480eb22bd592db1709d15da
+  checksum: d5ccb150bbf6695eb0bfd319cf63684eac8ba851263da03d148a752426718fe178aa2137ff09fc24821812221c77e3d6b0192946352459a1d07880591631b618
   languageName: node
   linkType: hard
 
@@ -9214,7 +9214,7 @@ __metadata:
     "@formatjs/intl-relativetimeformat": "npm:9.3.1"
     "@hyperledger/anoncreds-react-native": "npm:0.1.0"
     "@hyperledger/aries-askar-react-native": "npm:0.1.1"
-    "@hyperledger/aries-bifold-core": "patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/.yarn/patches/@hyperledger-aries-bifold-core-npm-1.0.0-alpha.215-abb2ca6d59.patch"
+    "@hyperledger/aries-bifold-core": "patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/app/patches/@hyperledger+aries-bifold-core+1.0.0-alpha.215.patch"
     "@hyperledger/aries-bifold-remote-logs": "npm:1.0.0-alpha.215"
     "@hyperledger/aries-bifold-verifier": "npm:1.0.0-alpha.215"
     "@hyperledger/aries-oca": "npm:1.0.0-alpha.215"
