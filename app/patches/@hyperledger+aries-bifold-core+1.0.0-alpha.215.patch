@@ -1,15 +1,15 @@
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/assets/img/the-wallet-picture_2.png b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/the-wallet-picture_2.png
+diff --git a/App/assets/img/the-wallet-picture_2.png b/App/assets/img/the-wallet-picture_2.png
 new file mode 100644
 index 0000000..1c3acdb
-Binary files /dev/null and b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/the-wallet-picture_2.png differ
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/assets/img/wallet_new.png b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/wallet_new.png
+Binary files /dev/null and b/App/assets/img/the-wallet-picture_2.png differ
+diff --git a/App/assets/img/wallet_new.png b/App/assets/img/wallet_new.png
 new file mode 100644
 index 0000000..e0253e1
-Binary files /dev/null and b/node_modules/@hyperledger/aries-bifold-core/App/assets/img/wallet_new.png differ
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx b/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
+Binary files /dev/null and b/App/assets/img/wallet_new.png differ
+diff --git a/App/components/misc/CredentialCard11.tsx b/App/components/misc/CredentialCard11.tsx
 index b7ec464..e90f3f9 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/components/misc/CredentialCard11.tsx
+--- a/App/components/misc/CredentialCard11.tsx
++++ b/App/components/misc/CredentialCard11.tsx
 @@ -133,14 +133,24 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
    }
  
@@ -231,10 +231,10 @@ index b7ec464..e90f3f9 100644
          </View>
        </TouchableOpacity>
      </View>
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx b/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx
+diff --git a/App/components/record/RecordField.tsx b/App/components/record/RecordField.tsx
 index abf013e..50b247a 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/components/record/RecordField.tsx
+--- a/App/components/record/RecordField.tsx
++++ b/App/components/record/RecordField.tsx
 @@ -92,6 +92,19 @@ const RecordField: React.FC<RecordFieldProps> = ({
      },
    })
@@ -264,10 +264,10 @@ index abf013e..50b247a 100644
            </Text>
          )}
  
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/configs/ledgers/indy/ledgers.json b/node_modules/@hyperledger/aries-bifold-core/App/configs/ledgers/indy/ledgers.json
+diff --git a/App/configs/ledgers/indy/ledgers.json b/App/configs/ledgers/indy/ledgers.json
 index 6b6fcc1..ddcc3e1 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/configs/ledgers/indy/ledgers.json
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/configs/ledgers/indy/ledgers.json
+--- a/App/configs/ledgers/indy/ledgers.json
++++ b/App/configs/ledgers/indy/ledgers.json
 @@ -1,10 +1,11 @@
  [
 +
@@ -300,10 +300,10 @@ index 6b6fcc1..ddcc3e1 100644
    }
  ]
 \ No newline at end of file
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
+diff --git a/App/screens/CredentialDetails.tsx b/App/screens/CredentialDetails.tsx
 index cd71764..3f69fcc 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialDetails.tsx
+--- a/App/screens/CredentialDetails.tsx
++++ b/App/screens/CredentialDetails.tsx
 @@ -66,8 +66,14 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
    })
    const credentialConnectionLabel = getCredentialConnectionLabel(credential)
@@ -334,10 +334,10 @@ index cd71764..3f69fcc 100644
  
          {isRevoked && !isRevokedMessageHidden ? (
            <View style={{ padding: paddingVertical, paddingTop: 0 }}>
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx
+diff --git a/App/screens/CredentialOffer.tsx b/App/screens/CredentialOffer.tsx
 index 25ad0c0..16d70ad 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/CredentialOffer.tsx
+--- a/App/screens/CredentialOffer.tsx
++++ b/App/screens/CredentialOffer.tsx
 @@ -191,7 +191,7 @@ const CredentialOffer: React.FC<CredentialOfferProps> = ({ navigation, route })
    const header = () => {
      return (
@@ -347,10 +347,10 @@ index 25ad0c0..16d70ad 100644
          <View style={styles.headerTextContainer}>
            <Text style={styles.headerText} testID={testIdWithKey('HeaderText')}>
              <Text>{credentialConnectionLabel || t('ContactDetails.AContact')}</Text>{' '}
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx
+diff --git a/App/screens/Home.tsx b/App/screens/Home.tsx
 index 68de9ff..7a1e165 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/Home.tsx
+--- a/App/screens/Home.tsx
++++ b/App/screens/Home.tsx
 @@ -26,7 +26,6 @@ const Home: React.FC<HomeProps> = () => {
    } = useConfiguration()
    const { notifications } = useCustomNotifications()
@@ -359,10 +359,10 @@ index 68de9ff..7a1e165 100644
    const { ColorPallet } = useTheme()
    const [store, dispatch] = useStore()
    const { start } = useTour()
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx b/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx
+diff --git a/App/screens/ProofRequest.tsx b/App/screens/ProofRequest.tsx
 index d0e753a..ae5ec60 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/screens/ProofRequest.tsx
+--- a/App/screens/ProofRequest.tsx
++++ b/App/screens/ProofRequest.tsx
 @@ -430,7 +430,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
            </View>
          ) : (
@@ -372,10 +372,10 @@ index d0e753a..ae5ec60 100644
              <View style={styles.headerTextContainer}>
                {!hasSatisfiedPredicates(getCredentialsFields()) ? (
                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-diff --git a/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts b/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
+diff --git a/App/utils/helpers.ts b/App/utils/helpers.ts
 index 9a0682d..a5c7849 100644
---- a/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
-+++ b/node_modules/@hyperledger/aries-bifold-core/App/utils/helpers.ts
+--- a/App/utils/helpers.ts
++++ b/App/utils/helpers.ts
 @@ -227,13 +227,9 @@ export function getConnectionName(
    connection: ConnectionRecord | undefined,
    alternateContactNames: Record<string, string>
