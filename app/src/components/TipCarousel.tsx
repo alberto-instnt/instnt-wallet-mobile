@@ -1,6 +1,15 @@
 import React, { FunctionComponent, PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, View, Text, useWindowDimensions, FlatList, ListRenderItem, AccessibilityInfo } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  useWindowDimensions,
+  FlatList,
+  ListRenderItem,
+  AccessibilityInfo,
+  Platform,
+} from 'react-native'
 
 // used for randomizng tip order
 const shuffleArray = (arr: number[]) => {
@@ -47,13 +56,19 @@ const Comp: FunctionComponent<TipProps> = ({ item, width, header }) => {
     tipHeader: {
       paddingBottom: 3,
       fontSize: 26,
-      fontFamily: 'BCSans-Regular',
+      fontFamily: Platform.select({
+        ios: 'Courier',
+        android: 'monospace',
+      }),
       fontWeight: 'bold',
       color: 'white',
     },
     tipText: {
       fontSize: 26,
-      fontFamily: 'BCSans-Regular',
+      fontFamily: Platform.select({
+        ios: 'Courier',
+        android: 'monospace',
+      }),
       fontWeight: 'bold',
       color: 'white',
       marginTop: 10,
