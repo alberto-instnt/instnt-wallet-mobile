@@ -119,7 +119,7 @@ interface ITextTheme {
 export const TextTheme: ITextTheme = {
   headingOne: {
     fontFamily: Platform.select({
-      ios: 'Courier', // iOS built-in monospace font
+      ios: 'monospace', // iOS built-in monospace font
       android: 'monospace', // Android built-in monospace font
     }),
     fontSize: 36,
@@ -129,7 +129,7 @@ export const TextTheme: ITextTheme = {
   },
   headingTwo: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 28,
@@ -139,7 +139,7 @@ export const TextTheme: ITextTheme = {
   },
   headingThree: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 26,
@@ -149,7 +149,7 @@ export const TextTheme: ITextTheme = {
   },
   headingFour: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 21,
@@ -159,7 +159,7 @@ export const TextTheme: ITextTheme = {
   },
   normal: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 18,
@@ -169,7 +169,7 @@ export const TextTheme: ITextTheme = {
   },
   bold: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 18,
@@ -179,7 +179,7 @@ export const TextTheme: ITextTheme = {
   },
   label: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 14,
@@ -189,7 +189,7 @@ export const TextTheme: ITextTheme = {
   },
   labelTitle: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 16,
@@ -199,7 +199,7 @@ export const TextTheme: ITextTheme = {
   },
   labelSubtitle: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 14,
@@ -209,7 +209,7 @@ export const TextTheme: ITextTheme = {
   },
   labelText: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 10,
@@ -220,7 +220,7 @@ export const TextTheme: ITextTheme = {
   },
   caption: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 14,
@@ -230,7 +230,7 @@ export const TextTheme: ITextTheme = {
   },
   title: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 20,
@@ -240,7 +240,7 @@ export const TextTheme: ITextTheme = {
   },
   headerTitle: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 20,
@@ -251,7 +251,7 @@ export const TextTheme: ITextTheme = {
   modalNormal: {
     fontSize: 18,
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontWeight: 'normal',
@@ -261,7 +261,7 @@ export const TextTheme: ITextTheme = {
   modalTitle: {
     fontSize: 28,
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontWeight: 'bold',
@@ -270,7 +270,7 @@ export const TextTheme: ITextTheme = {
   },
   modalHeadingOne: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 38,
@@ -279,7 +279,7 @@ export const TextTheme: ITextTheme = {
   },
   modalHeadingThree: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 26,
@@ -288,7 +288,7 @@ export const TextTheme: ITextTheme = {
   },
   popupModalText: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 18,
@@ -298,7 +298,7 @@ export const TextTheme: ITextTheme = {
   },
   settingsText: {
     fontFamily: Platform.select({
-      ios: 'Courier',
+      ios: 'monospace',
       android: 'monospace',
     }),
     fontSize: 21,

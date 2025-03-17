@@ -57,7 +57,7 @@ const Comp: FunctionComponent<TipProps> = ({ item, width, header }) => {
       paddingBottom: 3,
       fontSize: 26,
       fontFamily: Platform.select({
-        ios: 'Courier',
+        ios: 'monospace',
         android: 'monospace',
       }),
       fontWeight: 'bold',
@@ -66,7 +66,7 @@ const Comp: FunctionComponent<TipProps> = ({ item, width, header }) => {
     tipText: {
       fontSize: 26,
       fontFamily: Platform.select({
-        ios: 'Courier',
+        ios: 'monospace',
         android: 'monospace',
       }),
       fontWeight: 'bold',
