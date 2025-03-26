@@ -51,7 +51,7 @@ const NotificationColors: INotificationColors = {
 
 const GrayscaleColors: IGrayscaleColors = {
   black: '#000000',
-  darkGrey: '#1E3079', // For all screen
+  darkGrey: '#5264b4', // For all screen
   mediumGrey: '#606060',
   lightGrey: '#D3D3D3',
   veryLightGrey: '#F2F2F2',
