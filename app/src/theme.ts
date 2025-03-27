@@ -1,6 +1,7 @@
 import {
   ImageAssets as BifoldImageAssets,
   IInputs,
+  IFontAttributes,
   ITextTheme,
   IBrandColors,
   ISemanticColors,
@@ -11,7 +12,7 @@ import {
   IAssets,
 } from '@hyperledger/aries-bifold-core'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 import Logo from './assets/img/logo.svg'
 
@@ -33,10 +34,10 @@ const NotificationColors: INotificationColors = {
   successBorder: '#000000',
   successIcon: '#000000',
   successText: '#FFFFFF',
-  info: '#000000',
-  infoBorder: '#FFFFFF',
-  infoIcon: '#0099FF',
-  infoText: '#FFFFFF',
+  info: '#FAD559',
+  infoBorder: '#1E3079',
+  infoIcon: '#1E3079',
+  infoText: '#1E3079', // For on boarding screen
   warn: '#313132',
   warnBorder: '#FCBA19',
   warnIcon: '#FCBA19',
@@ -50,7 +51,7 @@ const NotificationColors: INotificationColors = {
 
 const GrayscaleColors: IGrayscaleColors = {
   black: '#000000',
-  darkGrey: '#FFFFFF',
+  darkGrey: '#5264b4', // For all screen
   mediumGrey: '#606060',
   lightGrey: '#D3D3D3',
   veryLightGrey: '#F2F2F2',
@@ -64,14 +65,14 @@ const BrandColors: IBrandColors = {
   secondaryDisabled: '#FAD559',
   primaryLight: '#D9EAF7',
   highlight: '#FFC200',
-  primaryBackground: '#000000',
-  secondaryBackground: '#000000',
+  primaryBackground: '#FFFFFF',
+  secondaryBackground: '#FFFFFF',
   modalPrimary: '#003366',
   modalSecondary: '#FFFFFFFF',
-  modalPrimaryBackground: '#000000',
-  modalSecondaryBackground: '#000000',
+  modalPrimaryBackground: '#FFFFFF',
+  modalSecondaryBackground: '#FFFFFF',
   modalIcon: GrayscaleColors.darkGrey,
-  link: '#FFFFFF',
+  link: '#1E3079',
   unorderedList: GrayscaleColors.darkGrey,
   unorderedListModal: GrayscaleColors.darkGrey,
   text: GrayscaleColors.white,
@@ -89,113 +90,221 @@ export const ColorPallet: IColorPallet = {
   grayscale: GrayscaleColors,
 }
 
+interface IUpdatedTextTheme extends IFontAttributes {
+  letterSpacing?: number
+}
+
+interface ITextTheme {
+  headingOne: IUpdatedTextTheme
+  headingTwo: IUpdatedTextTheme
+  headingThree: IUpdatedTextTheme
+  headingFour: IUpdatedTextTheme
+  normal: IUpdatedTextTheme
+  bold: IUpdatedTextTheme
+  label: IUpdatedTextTheme
+  labelTitle: IUpdatedTextTheme
+  labelSubtitle: IUpdatedTextTheme
+  labelText: IUpdatedTextTheme
+  caption: IUpdatedTextTheme
+  title: IUpdatedTextTheme
+  headerTitle: IUpdatedTextTheme
+  modalNormal: IUpdatedTextTheme
+  modalTitle: IUpdatedTextTheme
+  popupModalText: IUpdatedTextTheme
+  modalHeadingOne: IUpdatedTextTheme
+  modalHeadingThree: IUpdatedTextTheme
+  settingsText: IUpdatedTextTheme
+}
+
 export const TextTheme: ITextTheme = {
   headingOne: {
-    fontFamily: 'BCSans-Regular',
-    fontSize: 38,
+    fontFamily: Platform.select({
+      ios: 'monospace', // iOS built-in monospace font
+      android: 'monospace', // Android built-in monospace font
+    }),
+    fontSize: 36,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   headingTwo: {
-    fontFamily: 'BCSans-Regular',
-    fontSize: 32,
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
+    fontSize: 28,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   headingThree: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 26,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   headingFour: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 21,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   normal: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 18,
     fontWeight: 'normal',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   bold: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 18,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   label: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 14,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   labelTitle: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 16,
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   labelSubtitle: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 14,
     fontWeight: 'normal',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   labelText: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 10,
     fontWeight: 'normal',
     fontStyle: 'italic',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   caption: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 14,
     fontWeight: 'normal',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   title: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 20,
     fontWeight: 'bold',
     color: ColorPallet.notification.infoText,
+    letterSpacing: -0.75,
   },
   headerTitle: {
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 20,
     fontWeight: 'bold',
     color: ColorPallet.brand.headerText,
+    letterSpacing: -0.75,
   },
   modalNormal: {
     fontSize: 18,
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontWeight: 'normal',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   modalTitle: {
     fontSize: 28,
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontWeight: 'bold',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   modalHeadingOne: {
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 38,
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   modalHeadingThree: {
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 26,
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   popupModalText: {
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 18,
     fontWeight: 'normal',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
   settingsText: {
-    fontFamily: 'BCSans-Regular',
+    fontFamily: Platform.select({
+      ios: 'monospace',
+      android: 'monospace',
+    }),
     fontSize: 21,
     fontWeight: 'normal',
     color: ColorPallet.grayscale.darkGrey,
+    letterSpacing: -0.75,
   },
 }
 
@@ -267,7 +376,7 @@ export const Buttons = StyleSheet.create({
     padding: 16,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: ColorPallet.grayscale.white,
+    borderColor: ColorPallet.grayscale.darkGrey,
   },
   secondaryDisabled: {
     padding: 16,
@@ -278,7 +387,7 @@ export const Buttons = StyleSheet.create({
   secondaryText: {
     ...TextTheme.normal,
     fontWeight: 'bold',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
     textAlign: 'center',
   },
   secondaryTextDisabled: {
@@ -363,8 +472,10 @@ export const ListItems = StyleSheet.create({
   },
   recordAttributeLabel: {
     ...TextTheme.bold,
+    letterSpacing: -0.75,
   },
   recordContainer: {
+    //Credential offer record background
     backgroundColor: ColorPallet.brand.secondaryBackground,
   },
   recordBorder: {
@@ -375,6 +486,7 @@ export const ListItems = StyleSheet.create({
   },
   recordAttributeText: {
     ...TextTheme.normal,
+    letterSpacing: -0.75,
   },
   proofIcon: {
     ...TextTheme.headingOne,
@@ -627,17 +739,19 @@ export const OnboardingTheme = {
     color: ColorPallet.brand.secondary,
   },
   pagerNavigationButton: {
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
     fontWeight: 'bold',
     fontSize: 18,
   },
   headerTintColor: ColorPallet.grayscale.white,
   headerText: {
     ...TextTheme.headingTwo,
+    letterSpacing: -0.75,
     color: ColorPallet.notification.infoText,
   },
   bodyText: {
     ...TextTheme.normal,
+    letterSpacing: -0.75,
     color: ColorPallet.notification.infoText,
   },
   imageDisplayOptions: {
@@ -693,14 +807,14 @@ export const Assets: IAssets = {
   svg: { ...BifoldImageAssets.svg, logo: Logo as React.FC },
   img: {
     logoSecondary: {
-      src: require('./assets/img/Acme-white.png'),
+      src: require('./assets/img/Acme-black.png'),
       aspectRatio: 1,
       height: '33%',
       width: '33%',
       resizeMode: 'contain',
     },
     logoPrimary: {
-      src: require('./assets/img/Acme-white.png'),
+      src: require('./assets/img/Acme-black.png'),
       aspectRatio: 1,
       height: 100,
       width: 100,

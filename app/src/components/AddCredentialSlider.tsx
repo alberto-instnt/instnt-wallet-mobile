@@ -34,7 +34,7 @@ export default function AddCredentialSlider() {
       height: '100%',
     },
     modalView: {
-      backgroundColor: ColorPallet.brand.primary,
+      backgroundColor: ColorPallet.brand.primaryDisabled,
       borderTopStartRadius: 20,
       borderTopEndRadius: 20,
       shadowColor: '#000',

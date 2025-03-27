@@ -47,10 +47,12 @@ const Terms = () => {
     },
     bodyText: {
       ...TextTheme.normal,
+      letterSpacing: -0.75,
       flexShrink: 1,
     },
     titleText: {
       ...TextTheme.normal,
+      letterSpacing: -0.75,
       textDecorationLine: 'underline',
     },
     paragraph: {
