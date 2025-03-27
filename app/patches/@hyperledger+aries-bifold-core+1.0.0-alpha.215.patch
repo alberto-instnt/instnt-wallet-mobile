@@ -1,13 +1,25 @@
+diff --git a/App/.DS_Store b/App/.DS_Store
+new file mode 100644
+index 0000000..52adeac
+Binary files /dev/null and b/App/.DS_Store differ
+diff --git a/App/assets/.DS_Store b/App/assets/.DS_Store
+new file mode 100644
+index 0000000..ac8db24
+Binary files /dev/null and b/App/assets/.DS_Store differ
+diff --git a/App/assets/img/.DS_Store b/App/assets/img/.DS_Store
+new file mode 100644
+index 0000000..5008ddf
+Binary files /dev/null and b/App/assets/img/.DS_Store differ
 diff --git a/App/assets/img/the-wallet-picture_2.png b/App/assets/img/the-wallet-picture_2.png
 new file mode 100644
 index 0000000..1c3acdb
 Binary files /dev/null and b/App/assets/img/the-wallet-picture_2.png differ
 diff --git a/App/assets/img/wallet_new.png b/App/assets/img/wallet_new.png
 new file mode 100644
-index 0000000..e0253e1
+index 0000000..dd42964
 Binary files /dev/null and b/App/assets/img/wallet_new.png differ
 diff --git a/App/components/misc/CredentialCard11.tsx b/App/components/misc/CredentialCard11.tsx
-index b7ec464..e90f3f9 100644
+index b7ec464..5538fac 100644
 --- a/App/components/misc/CredentialCard11.tsx
 +++ b/App/components/misc/CredentialCard11.tsx
 @@ -133,14 +133,24 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
@@ -17,7 +29,7 @@ index b7ec464..e90f3f9 100644
 +     imgBackground: {
 +      flexGrow: 1,
 +      height: width / 2.1,
-+      minWidth: width - 60
++      minWidth: width - 60,
 +    },
      container: {
        backgroundColor: overlay.brandingOverlay?.primaryBackgroundColor,
@@ -48,11 +60,11 @@ index b7ec464..e90f3f9 100644
        flex: 1,
        padding,
 -      marginLeft: -1 * logoHeight + padding,
-+      marginLeft: -0.8 * logoHeight + padding,
++      marginLeft: -.6 * logoHeight + padding,//card record move
      },
      imageAttr: {
        height: 150,
-@@ -194,12 +210,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -194,12 +210,19 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
        minHeight: ListItems.recordAttributeText.fontSize,
        paddingVertical: 4,
      },
@@ -64,15 +76,16 @@ index b7ec464..e90f3f9 100644
        flexShrink: 1,
      },
 +    textContainer: {
-+      color: proof
-+        ? TextTheme.normal.color
-+         : '#000',
++      // color: proof
++      //   ? TextTheme.normal.color
++      //    : '#000',
++      ...TextTheme.normal,
 +      flexShrink: 1,
 +    },
      errorText: {
        ...TextTheme.normal,
        color: ListItems.proofError.color,
-@@ -352,8 +374,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -352,8 +375,18 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
@@ -92,7 +105,7 @@ index b7ec464..e90f3f9 100644
  
      return (
        <Text
-@@ -515,6 +547,83 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -515,6 +548,83 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
@@ -176,7 +189,7 @@ index b7ec464..e90f3f9 100644
    const CredentialCardSecondaryBody: React.FC = () => {
      return (
        <View
-@@ -600,6 +709,32 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -600,6 +710,32 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
      )
    }
  
@@ -209,7 +222,7 @@ index b7ec464..e90f3f9 100644
    const CredentialCard: React.FC<{ status?: 'error' | 'warn' }> = ({ status }) => {
      return (
        <View
-@@ -617,8 +752,8 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -617,8 +753,8 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
            })
          }
        >
@@ -220,7 +233,7 @@ index b7ec464..e90f3f9 100644
          <CredentialCardPrimaryBody />
          <CredentialCardStatus status={status} />
        </View>
-@@ -657,7 +792,9 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
+@@ -657,7 +793,9 @@ const CredentialCard11: React.FC<CredentialCard11Props> = ({
                watermark={overlay.metaOverlay?.watermark}
              />
            )}
@@ -300,11 +313,304 @@ index 6b6fcc1..ddcc3e1 100644
    }
  ]
 \ No newline at end of file
+diff --git a/App/screens/Connection.tsx b/App/screens/Connection.tsx
+index fd231b3..6924f03 100644
+--- a/App/screens/Connection.tsx
++++ b/App/screens/Connection.tsx
+@@ -2,7 +2,7 @@ import { DidExchangeState } from '@aries-framework/core'
+ import { useConnectionById } from '@aries-framework/react-hooks'
+ import { CommonActions, useFocusEffect } from '@react-navigation/native'
+ import { StackScreenProps } from '@react-navigation/stack'
+-import React, { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
++import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+ import { useTranslation } from 'react-i18next'
+ import { AccessibilityInfo, BackHandler, Modal, ScrollView, StyleSheet, Text, View } from 'react-native'
+ import { SafeAreaView } from 'react-native-safe-area-context'
+@@ -41,15 +41,31 @@ const Connection: React.FC<ConnectionProps> = ({ navigation, route }) => {
+   const { notifications } = useNotifications()
+   const { ColorPallet, TextTheme } = useTheme()
+   const { ConnectionLoading } = useAnimatedComponents()
+-  const oobRecord = useOutOfBandByConnectionId(connectionId ?? '')
+-  const goalCode = oobRecord?.outOfBandInvitation.goalCode
++  // const oobRecord = useOutOfBandByConnectionId(connectionId ?? '')
++  // const goalCode = oobRecord?.outOfBandInvitation.goalCode
+   const merge: MergeFunction = (current, next) => ({ ...current, ...next })
+-  const [state, dispatch] = useReducer(merge, {
++
++  const [state, setState] = useState<{
++    isVisible: boolean
++    notificationRecord?: any
++    isInitialized: boolean
++    shouldShowDelayMessage: boolean
++  }>({
+     isVisible: true,
+     isInitialized: false,
+     shouldShowDelayMessage: false,
+-    connectionIsActive: false,
+   })
++
++  const { isInitialized, shouldShowDelayMessage, isVisible, notificationRecord } = state;
++
++
++  // const [state, dispatch] = useReducer(merge, {
++  //   isVisible: true,
++  //   isInitialized: false,
++  //   shouldShowDelayMessage: false,
++  //   notificationRecord: {},
++  //   connectionIsActive: false,
++  // })
+   const styles = StyleSheet.create({
+     container: {
+       height: '100%',
+@@ -77,34 +93,37 @@ const Connection: React.FC<ConnectionProps> = ({ navigation, route }) => {
+     },
+   })
+ 
+-  const goalCodeAction = (goalCode: string): (() => void) => {
+-    const codes: { [key: string]: undefined | (() => void) } = {
+-      'aries.vc.verify': () => navigation.navigate(Screens.ProofRequest, { proofId: state.notificationRecord.id }),
+-      'aries.vc.issue': () =>
+-        navigation.navigate(Screens.CredentialOffer, { credentialId: state.notificationRecord.id }),
+-    }
+-    let action = codes[goalCode]
++  // const goalCodeAction = (goalCode: string): (() => void) => {
++  //   const codes: { [key: string]: undefined | (() => void) } = {
++  //     'aries.vc.verify': () => navigation.navigate(Screens.ProofRequest, { proofId: state.notificationRecord.id }),
++  //     'aries.vc.issue': () =>
++  //       navigation.navigate(Screens.CredentialOffer, { credentialId: state.notificationRecord.id }),
++  //   }
++  //   let action = codes[goalCode]
+ 
+-    if (action === undefined) {
+-      const matchCode = Object.keys(codes).find((code) => goalCode.startsWith(code))
+-      action = codes[matchCode ?? '']
++  //   if (action === undefined) {
++  //     const matchCode = Object.keys(codes).find((code) => goalCode.startsWith(code))
++  //     action = codes[matchCode ?? '']
+ 
+-      if (action === undefined) {
+-        throw new Error('Unhandled goal code type')
+-      }
+-    }
++  //     if (action === undefined) {
++  //       throw new Error('Unhandled goal code type')
++  //     }
++  //   }
+ 
+-    return action
+-  }
++  //   return action
++  // }
+ 
+   const startTimer = () => {
+-    if (!state.isInitialized) {
++    if (!isInitialized) {
+       timerRef.current = setTimeout(() => {
+-        dispatch({ shouldShowDelayMessage: true })
++        //dispatch({ shouldShowDelayMessage: true })
++        setState((prev) => ({ ...prev, shouldShowDelayMessage: true }))
++        setState
+         timerRef.current = null
+       }, connTimerDelay)
+ 
+-      dispatch({ isInitialized: true })
++      setState((prev) => ({ ...prev, isInitialized: true }))
++      //dispatch({ isInitialized: true })
+     }
+   }
+ 
+@@ -116,7 +135,8 @@ const Connection: React.FC<ConnectionProps> = ({ navigation, route }) => {
+   }
+ 
+   const onDismissModalTouched = () => {
+-    dispatch({ shouldShowDelayMessage: false, isVisible: false })
++    setState((prev) => ({ ...prev, shouldShowDelayMessage: false, isVisible: false}))
++    //dispatch({ shouldShowDelayMessage: false, isVisible: false })
+     navigation.getParent()?.navigate(TabStacks.HomeStack, { screen: Screens.Home })
+   }
+ 
+@@ -126,57 +146,65 @@ const Connection: React.FC<ConnectionProps> = ({ navigation, route }) => {
+   }, [])
+ 
+   useEffect(() => {
+-    if (state.shouldShowDelayMessage && !state.notificationRecord) {
++    if (shouldShowDelayMessage && !notificationRecord) {
+       if (autoRedirectConnectionToHome) {
+-        dispatch({ shouldShowDelayMessage: false, isVisible: false })
++        //dispatch({ shouldShowDelayMessage: false, isVisible: false })
++         setState((prev) => ({ ...prev, shouldShowDelayMessage: false, isVisible: false}))
+         navigation.getParent()?.navigate(TabStacks.HomeStack, { screen: Screens.Home })
+       } else {
+         AccessibilityInfo.announceForAccessibility(t('Connection.TakingTooLong'))
+       }
+     }
+-  }, [state.shouldShowDelayMessage])
++  }, [shouldShowDelayMessage])
+ 
+-  useEffect(() => {
+-    // for non-connectionless, invalid connections stay in the below state
+-    if (connection && connection.state === DidExchangeState.RequestSent) {
+-      return
+-    }
++  // useEffect(() => {
++  //   // for non-connectionless, invalid connections stay in the below state
++  //   if (connection && connection.state === DidExchangeState.RequestSent) {
++  //     console.log('blank response', connection)
++  //     return
++  //   }
+ 
+-    if (
+-      !connectionId &&
+-      !oobRecord &&
+-      !goalCode &&
+-      state.notificationRecord &&
+-      state.notificationRecord.state === 'request-received'
+-    ) {
+-      navigation.replace(Screens.ProofRequest, { proofId: state.notificationRecord.id })
+-      dispatch({ isVisible: false })
+-
+-      return
+-    }
++  //   if (
++  //     !connectionId &&
++  //     !oobRecord &&
++  //     !goalCode &&
++  //     state.notificationRecord &&
++  //     state.notificationRecord.state === 'request-received'
++  //   ) {
++  //     console.log('request-received',  state.notificationRecord.state)
++  //     navigation.replace(Screens.ProofRequest, { proofId: state.notificationRecord.id })
++  //     dispatch({ isVisible: false })
+ 
+-    if (
+-      connectionId &&
+-      oobRecord &&
+-      (!goalCode || (!goalCode.startsWith('aries.vc.verify') && !goalCode.startsWith('aries.vc.issue')))
+-    ) {
+-      // No goal code, we don't know what to expect next,
+-      // navigate to the chat screen and set home screen as only history
+-      navigation.getParent()?.dispatch(
+-        CommonActions.reset({
+-          index: 1,
+-          routes: [{ name: Stacks.TabStack }, { name: Screens.Chat, params: { connectionId } }],
+-        })
+-      )
+-
+-      dispatch({ isVisible: false })
+-      return
+-    }
++  //     return
++  //   }
+ 
+-    if (state.notificationRecord && goalCode) {
+-      goalCodeAction(goalCode)()
+-    }
+-  }, [connection, connection?.state, oobRecord, goalCode, state.notificationRecord])
++  //   if (
++  //     connectionId &&
++  //     oobRecord &&
++  //     (!goalCode || (!goalCode.startsWith('aries.vc.verify') && !goalCode.startsWith('aries.vc.issue')))
++  //   ) {
++  //     console.log('connectionId', connectionId)
++  //     console.log('oobRecord', oobRecord)
++  //     console.log('goalCode', goalCode)
++  //     // No goal code, we don't know what to expect next,
++  //     // navigate to the chat screen and set home screen as only history
++  //     navigation.getParent()?.dispatch(
++  //       CommonActions.reset({
++  //         index: 1,
++  //         routes: [{ name: Stacks.TabStack }, { name: Screens.Chat, params: { connectionId } }],
++  //       })
++  //     )
++
++  //     dispatch({ isVisible: false })
++  //     return
++  //   }
++
++  //   if (state.notificationRecord && goalCode) {
++  //     console.log('state.notificationRecord', state.notificationRecord)
++  //     console.log('goalCode', goalCode)
++  //     goalCodeAction(goalCode)()
++  //   }
++  // }, [connection, connection?.state, oobRecord, goalCode, state.notificationRecord])
+ 
+   useMemo(() => {
+     startTimer()
+@@ -191,34 +219,53 @@ const Connection: React.FC<ConnectionProps> = ({ navigation, route }) => {
+   )
+ 
+   useEffect(() => {
+-    if (state.isVisible) {
++    if (notificationRecord) {
++      console.log('notificationRecord', notificationRecord)
++      switch (notificationRecord.type) {
++        case 'CredentialRecord':
++          navigation.navigate(Screens.CredentialOffer, { credentialId: notificationRecord.id })
++          break
++        case 'ProofRecord':
++          navigation.navigate(Screens.ProofRequest, { proofId: notificationRecord.id })
++          break
++        default:
++          throw new Error('Unhandled notification type')
++      }
++    }
++  }, [notificationRecord])
++
++  useEffect(() => {
++    if (isVisible) {
+       for (const notification of notifications) {
+         // no action taken for BasicMessageRecords
+         if (notification.type !== 'BasicMessageRecord') {
+           if (
+-            !state.notificationRecord &&
++            !notificationRecord &&
+             ((connectionId && notification.connectionId === connectionId) ||
+               (threadId && notification.threadId == threadId))
+           ) {
+-            dispatch({ notificationRecord: notification, isVisible: false })
++             setState((prev) => ({ ...prev, notificationRecord: notification, isVisible: false}))
++            //dispatch({ notificationRecord: notification, isVisible: false })
+             break
+           }
+           if (!connection && notification.state === 'request-received') {
+-            dispatch({ notificationRecord: notification, isVisible: false })
++            setState((prev) => ({ ...prev, notificationRecord: notification, isVisible: false}))
++            //dispatch({ notificationRecord: notification, isVisible: false })
+             break
+           }
+         }
+       }
+     }
+-  }, [notifications])
++  }, [notifications, state])
+ 
+   return (
+     <Modal
+-      visible={state.isVisible}
++      visible={isVisible}
+       transparent={true}
+       animationType={'slide'}
+       onRequestClose={() => {
+-        dispatch({ isVisible: false })
++        setState((prev) => ({ ...prev, isVisible: false}))
++        //dispatch({ isVisible: false })
+       }}
+     >
+       <SafeAreaView style={{ backgroundColor: ColorPallet.brand.modalPrimaryBackground }}>
+@@ -236,7 +283,7 @@ const Connection: React.FC<ConnectionProps> = ({ navigation, route }) => {
+             <ConnectionLoading />
+           </View>
+ 
+-          {state.shouldShowDelayMessage && (
++          {shouldShowDelayMessage && (
+             <Text style={[TextTheme.modalNormal, styles.delayMessageText]} testID={testIdWithKey('TakingTooLong')}>
+               {t('Connection.TakingTooLong')}
+             </Text>
 diff --git a/App/screens/CredentialDetails.tsx b/App/screens/CredentialDetails.tsx
-index cd71764..3f69fcc 100644
+index cd71764..1c44f9b 100644
 --- a/App/screens/CredentialDetails.tsx
 +++ b/App/screens/CredentialDetails.tsx
-@@ -66,8 +66,14 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
+@@ -66,10 +66,16 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
    })
    const credentialConnectionLabel = getCredentialConnectionLabel(credential)
    const { width, height } = useWindowDimensions()
@@ -317,8 +623,11 @@ index cd71764..3f69fcc 100644
 +      height: width / 2.1,
 +    },
      container: {
-       backgroundColor: overlay.brandingOverlay?.primaryBackgroundColor,
+-      backgroundColor: overlay.brandingOverlay?.primaryBackgroundColor,
++      backgroundColor: '#ffffff',
        display: 'flex',
+     },
+     secondaryHeaderContainer: {
 @@ -318,9 +324,11 @@ const CredentialDetails: React.FC<CredentialDetailsProps> = ({ navigation, route
        </View>
      ) : (
@@ -359,8 +668,21 @@ index 68de9ff..7a1e165 100644
    const { ColorPallet } = useTheme()
    const [store, dispatch] = useStore()
    const { start } = useTour()
+diff --git a/App/screens/ListCredentials.tsx b/App/screens/ListCredentials.tsx
+index 423a4ab..d5447f7 100644
+--- a/App/screens/ListCredentials.tsx
++++ b/App/screens/ListCredentials.tsx
+@@ -69,7 +69,7 @@ const ListCredentials: React.FC = () => {
+           return (
+             <View
+               style={{
+-                marginHorizontal: 15,
++                marginHorizontal: 10,
+                 marginTop: 15,
+                 marginBottom: index === credentials.length - 1 ? 45 : 0,
+               }}
 diff --git a/App/screens/ProofRequest.tsx b/App/screens/ProofRequest.tsx
-index d0e753a..ae5ec60 100644
+index d0e753a..55762c7 100644
 --- a/App/screens/ProofRequest.tsx
 +++ b/App/screens/ProofRequest.tsx
 @@ -430,7 +430,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
@@ -372,6 +694,33 @@ index d0e753a..ae5ec60 100644
              <View style={styles.headerTextContainer}>
                {!hasSatisfiedPredicates(getCredentialsFields()) ? (
                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+@@ -580,7 +580,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
+           return (
+             <View>
+               {loading || attestationLoading ? null : (
+-                <View style={{ marginTop: 10, marginHorizontal: 20 }}>
++                <View style={{ marginTop: 10, marginHorizontal: 6 }}>
+                   <CredentialCard
+                     credential={item.credExchangeRecord}
+                     credDefId={item.credDefId}
+diff --git a/App/theme.ts b/App/theme.ts
+index d7c5b97..7def261 100644
+--- a/App/theme.ts
++++ b/App/theme.ts
+@@ -195,11 +195,11 @@ const BrandColors: IBrandColors = {
+   primaryLight: `rgba(53, 130, 63, ${lightOpacity})`,
+   highlight: '#FCBA19',
+   primaryBackground: '#000000',
+-  secondaryBackground: '#313132',
++  secondaryBackground: '#fad559',
+   modalPrimary: '#42803E',
+   modalSecondary: '#FFFFFFFF',
+   modalPrimaryBackground: '#000000',
+-  modalSecondaryBackground: '#313132',
++  modalSecondaryBackground: '#fad559',
+   modalIcon: GrayscaleColors.white,
+   unorderedList: GrayscaleColors.white,
+   unorderedListModal: GrayscaleColors.white,
 diff --git a/App/utils/helpers.ts b/App/utils/helpers.ts
 index 9a0682d..a5c7849 100644
 --- a/App/utils/helpers.ts
