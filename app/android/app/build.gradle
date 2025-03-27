@@ -96,7 +96,7 @@ android {
         applicationId "org.instnt.multipass"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE").toInteger() : 17
+        versionCode System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE").toInteger() : 18
         versionName System.getenv("VERSION_NAME") ? System.getenv("VERSION_NAME").toString() : "1.0.4"
 
         missingDimensionStrategy 'react-native-camera', 'general'
