@@ -1,24 +1,34 @@
-import { useAgent } from '@aries-framework/react-hooks'
-import { useTheme, useStore, testIdWithKey, DispatchAction, Screens } from '@hyperledger/aries-bifold-core'
-import { RemoteLogger, RemoteLoggerEventTypes } from '@hyperledger/aries-bifold-remote-logs'
+import {
+  DispatchAction,
+  SafeAreaModal,
+  Screens,
+  testIdWithKey,
+  TOKENS,
+  useAuth,
+  useServices,
+  useStore,
+  useTheme,
+  LockoutReason,
+} from '@bifold/core'
+import { RemoteLogger, RemoteLoggerEventTypes } from '@bifold/remote-logs'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DeviceEventEmitter, Modal, StyleSheet, Switch, Text, Pressable, View, ScrollView } from 'react-native'
+import { DeviceEventEmitter, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { BCState } from '../store'
-
+import { BCDispatchAction, BCState, Mode } from '@/store'
 import IASEnvironment from './IASEnvironment'
 import RemoteLogWarning from './RemoteLogWarning'
+import { BCThemeNames } from '@/constants'
 
-const Settings: React.FC = () => {
-  const { agent } = useAgent()
-  const logger = agent?.config.logger as RemoteLogger
+const Developer: React.FC = () => {
   const { t } = useTranslation()
   const [store, dispatch] = useStore<BCState>()
-  const { SettingsTheme, TextTheme, ColorPallet } = useTheme()
+  const { lockOutUser } = useAuth()
+  const { SettingsTheme, TextTheme, ColorPalette, setTheme, themeName } = useTheme()
+  const [logger] = useServices([TOKENS.UTIL_LOGGER]) as [RemoteLogger]
   const [environmentModalVisible, setEnvironmentModalVisible] = useState<boolean>(false)
   const [devMode, setDevMode] = useState<boolean>(true)
   const [useVerifierCapability, setUseVerifierCapability] = useState<boolean>(!!store.preferences.useVerifierCapability)
@@ -26,16 +36,20 @@ const Settings: React.FC = () => {
   const [useConnectionInviterCapability, setConnectionInviterCapability] = useState(
     !!store.preferences.useConnectionInviterCapability
   )
+  const [BCSCMode, setBCSCMode] = useState<boolean>(store.mode === Mode.BCSC)
   const [remoteLoggingWarningModalVisible, setRemoteLoggingWarningModalVisible] = useState(false)
   const [useDevVerifierTemplates, setDevVerifierTemplates] = useState(!!store.preferences.useDevVerifierTemplates)
   const [enableWalletNaming, setEnableWalletNaming] = useState(!!store.preferences.enableWalletNaming)
   const [preventAutoLock, setPreventAutoLock] = useState(!!store.preferences.preventAutoLock)
   const [remoteLoggingEnabled, setRemoteLoggingEnabled] = useState(logger?.remoteLoggingEnabled)
+  const [enableShareableLink, setEnableShareableLink] = useState(!!store.preferences.enableShareableLink)
+  const [enableProxy, setEnableProxy] = useState(!!store.developer.enableProxy)
+  const [enableAppToAppPersonFlow, setEnableAppToAppPersonFlow] = useState(!!store.developer.enableAppToAppPersonFlow)
   const navigation = useNavigation()
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: ColorPallet.brand.primaryBackground,
+      backgroundColor: ColorPalette.brand.primaryBackground,
       width: '100%',
     },
     section: {
@@ -63,7 +77,7 @@ const Settings: React.FC = () => {
     },
     rowSeparator: {
       borderBottomWidth: 1,
-      borderBottomColor: ColorPallet.brand.primaryBackground,
+      borderBottomColor: ColorPalette.brand.primaryBackground,
       marginHorizontal: 24,
     },
     logo: {
@@ -82,12 +96,10 @@ const Settings: React.FC = () => {
   }
 
   const SectionHeader = ({ icon, title }: { icon: string; title: string }): JSX.Element => (
-    <>
-      <View style={[styles.section, styles.sectionHeader]}>
-        <Icon name={icon} size={24} style={{ marginRight: 10, color: TextTheme.normal.color }} />
-        <Text style={[TextTheme.headingThree, { flexShrink: 1 }]}>{title}</Text>
-      </View>
-    </>
+    <View style={[styles.section, styles.sectionHeader]}>
+      <Icon name={icon} size={24} style={{ marginRight: 10, color: TextTheme.normal.color }} />
+      <Text style={[TextTheme.headingThree, { flexShrink: 1 }]}>{title}</Text>
+    </View>
   )
 
   interface SectionRowProps {
@@ -109,7 +121,7 @@ const Settings: React.FC = () => {
     subContent,
   }: SectionRowProps) => (
     <>
-      <View style={[styles.section]}>
+      <View style={styles.section}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.rowTitle}>{title}</Text>
           <Pressable
@@ -126,7 +138,7 @@ const Settings: React.FC = () => {
       </View>
       {showRowSeparator && (
         <View style={{ backgroundColor: SettingsTheme.groupBackground }}>
-          <View style={[styles.rowSeparator]}></View>
+          <View style={styles.rowSeparator}></View>
         </View>
       )}
     </>
@@ -198,10 +210,18 @@ const Settings: React.FC = () => {
     setEnableWalletNaming((previousState) => !previousState)
   }
 
-  const toggleRemoteLoggingWarningSwitch = () => {
+  const toggleRemoteLoggingSwitch = () => {
     if (remoteLoggingEnabled) {
-      DeviceEventEmitter.emit(RemoteLoggerEventTypes.ENABLE_REMOTE_LOGGING, false)
-      setRemoteLoggingEnabled(false)
+      const remoteLoggingEnabled = false
+
+      DeviceEventEmitter.emit(RemoteLoggerEventTypes.ENABLE_REMOTE_LOGGING, remoteLoggingEnabled)
+      setRemoteLoggingEnabled(remoteLoggingEnabled)
+
+      dispatch({
+        type: BCDispatchAction.REMOTE_DEBUGGING_STATUS_UPDATE,
+        payload: [{ enabled: remoteLoggingEnabled, expireAt: undefined }],
+      })
+
       return
     }
 
@@ -209,10 +229,19 @@ const Settings: React.FC = () => {
   }
 
   const onEnableRemoteLoggingPressed = () => {
-    DeviceEventEmitter.emit(RemoteLoggerEventTypes.ENABLE_REMOTE_LOGGING, true)
+    const remoteLoggingEnabled = true
+    DeviceEventEmitter.emit(RemoteLoggerEventTypes.ENABLE_REMOTE_LOGGING, remoteLoggingEnabled)
+    dispatch({
+      type: BCDispatchAction.REMOTE_DEBUGGING_STATUS_UPDATE,
+      payload: [{ enabledAt: new Date(), sessionId: logger.sessionId }],
+    })
+    setRemoteLoggingEnabled(remoteLoggingEnabled)
 
     setRemoteLoggingWarningModalVisible(false)
-    navigation.navigate(Screens.Home as never)
+
+    if (store.authentication.didAuthenticate) {
+      navigation.navigate(Screens.Home as never)
+    }
   }
 
   const onRemoteLoggingBackPressed = () => {
@@ -228,9 +257,55 @@ const Settings: React.FC = () => {
     setPreventAutoLock((previousState) => !previousState)
   }
 
+  const toggleShareableLinkSwitch = () => {
+    dispatch({
+      type: DispatchAction.USE_SHAREABLE_LINK,
+      payload: [!enableShareableLink],
+    })
+    setEnableShareableLink((previousState) => !previousState)
+  }
+
+  const toggleEnableProxySwitch = () => {
+    dispatch({
+      type: BCDispatchAction.TOGGLE_PROXY,
+      payload: [!enableProxy],
+    })
+    setEnableProxy((previousState) => !previousState)
+  }
+
+  const toggleEnableAppToAppPersonFlowSwitch = () => {
+    dispatch({
+      type: BCDispatchAction.TOGGLE_APP_TO_APP_PERSON_FLOW,
+      payload: [!enableAppToAppPersonFlow],
+    })
+    setEnableAppToAppPersonFlow((previousState) => !previousState)
+  }
+
+  const toggleTheme = () => {
+    if (themeName === BCThemeNames.BCSC) {
+      setTheme(BCThemeNames.BCWallet)
+    } else {
+      setTheme(BCThemeNames.BCSC)
+    }
+  }
+
+  const toggleMode = () => {
+    lockOutUser(LockoutReason.Timeout)
+
+    const newMode = BCSCMode ? Mode.BCWallet : Mode.BCSC
+    const newTheme = BCSCMode ? BCThemeNames.BCWallet : BCThemeNames.BCSC
+
+    setTheme(newTheme)
+    dispatch({
+      type: BCDispatchAction.UPDATE_MODE,
+      payload: [newMode],
+    })
+    setBCSCMode((previousState) => !previousState)
+  }
+
   return (
-    <SafeAreaView edges={['bottom', 'left', 'right']}>
-      <Modal
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
+      <SafeAreaModal
         visible={remoteLoggingWarningModalVisible}
         transparent={false}
         animationType={'fade'}
@@ -239,8 +314,8 @@ const Settings: React.FC = () => {
         }}
       >
         <RemoteLogWarning onBackPressed={onRemoteLoggingBackPressed} onEnablePressed={onEnableRemoteLoggingPressed} />
-      </Modal>
-      <Modal
+      </SafeAreaModal>
+      <SafeAreaModal
         visible={environmentModalVisible}
         transparent={false}
         animationType={'slide'}
@@ -249,7 +324,7 @@ const Settings: React.FC = () => {
         }}
       >
         <IASEnvironment shouldDismissModal={shouldDismissModal} />
-      </Modal>
+      </SafeAreaModal>
       <ScrollView style={styles.container}>
         <SectionRow
           title={t('Developer.DeveloperMode')}
@@ -257,14 +332,14 @@ const Settings: React.FC = () => {
           testID={testIdWithKey('ToggleDeveloper')}
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={devMode ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={devMode ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
             onValueChange={toggleSwitch}
             value={devMode}
           />
         </SectionRow>
-        <View style={[styles.sectionSeparator]}></View>
+        <View style={styles.sectionSeparator}></View>
         <SectionHeader icon={'apartment'} title={'IAS'} />
         <SectionRow
           title={t('Developer.Environment')}
@@ -274,11 +349,11 @@ const Settings: React.FC = () => {
             setEnvironmentModalVisible(true)
           }}
         >
-          <Text style={[TextTheme.headingFour, { fontWeight: 'normal', color: ColorPallet.brand.link }]}>
+          <Text style={[TextTheme.headingFour, { fontWeight: 'normal', color: ColorPalette.brand.link }]}>
             {store.developer.environment.name}
           </Text>
         </SectionRow>
-        <View style={[styles.sectionSeparator]}></View>
+        <View style={styles.sectionSeparator}></View>
         <SectionRow
           title={t('Verifier.UseVerifierCapability')}
           accessibilityLabel={t('Verifier.Toggle')}
@@ -286,9 +361,9 @@ const Settings: React.FC = () => {
           showRowSeparator
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={useVerifierCapability ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={useVerifierCapability ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
             onValueChange={toggleVerifierCapabilitySwitch}
             value={useVerifierCapability}
           />
@@ -300,9 +375,9 @@ const Settings: React.FC = () => {
           showRowSeparator
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={acceptDevCredentials ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={acceptDevCredentials ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
             onValueChange={toggleAcceptDevCredentialsSwitch}
             value={acceptDevCredentials}
           />
@@ -314,9 +389,9 @@ const Settings: React.FC = () => {
           showRowSeparator
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={useConnectionInviterCapability ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={useConnectionInviterCapability ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
             onValueChange={toggleConnectionInviterCapabilitySwitch}
             value={useConnectionInviterCapability}
           />
@@ -328,9 +403,9 @@ const Settings: React.FC = () => {
           showRowSeparator
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={useDevVerifierTemplates ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={useDevVerifierTemplates ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
             onValueChange={toggleDevVerifierTemplatesSwitch}
             value={useDevVerifierTemplates}
           />
@@ -343,9 +418,9 @@ const Settings: React.FC = () => {
             showRowSeparator
           >
             <Switch
-              trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-              thumbColor={enableWalletNaming ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-              ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+              trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+              thumbColor={enableWalletNaming ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+              ios_backgroundColor={ColorPalette.grayscale.lightGrey}
               onValueChange={toggleWalletNamingSwitch}
               value={enableWalletNaming}
             />
@@ -358,9 +433,9 @@ const Settings: React.FC = () => {
           showRowSeparator
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={preventAutoLock ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={preventAutoLock ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
             onValueChange={togglePreventAutoLockSwitch}
             value={preventAutoLock}
           />
@@ -381,12 +456,84 @@ const Settings: React.FC = () => {
           }
         >
           <Switch
-            trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-            thumbColor={remoteLoggingEnabled ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-            ios_backgroundColor={ColorPallet.grayscale.lightGrey}
-            onValueChange={toggleRemoteLoggingWarningSwitch}
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={remoteLoggingEnabled ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
+            onValueChange={toggleRemoteLoggingSwitch}
             value={remoteLoggingEnabled}
+          />
+        </SectionRow>
+
+        <SectionRow
+          title={t('PasteUrl.UseShareableLink')}
+          accessibilityLabel={t('PasteUrl.UseShareableLink')}
+          testID={testIdWithKey('ToggleUseShareableLink')}
+        >
+          <Switch
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={enableShareableLink ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
+            onValueChange={toggleShareableLinkSwitch}
+            value={enableShareableLink}
             disabled={!store.authentication.didAuthenticate}
+          />
+        </SectionRow>
+
+        <SectionRow
+          title={t('Developer.EnableProxy')}
+          accessibilityLabel={t('Developer.EnableProxy')}
+          testID={testIdWithKey('ToggleEnableProxy')}
+        >
+          <Switch
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={enableProxy ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
+            onValueChange={toggleEnableProxySwitch}
+            value={enableProxy}
+          />
+        </SectionRow>
+
+        <SectionRow
+          title={t('Developer.EnableAppToAppPersonFlow')}
+          accessibilityLabel={t('Developer.EnableAppToAppPersonFlow')}
+          testID={testIdWithKey('ToggleEnableAppToAppPersonFlow')}
+        >
+          <Switch
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={enableAppToAppPersonFlow ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
+            onValueChange={toggleEnableAppToAppPersonFlowSwitch}
+            value={enableAppToAppPersonFlow}
+          />
+        </SectionRow>
+
+        <SectionRow
+          title={t('Developer.SwitchTheme')}
+          accessibilityLabel={t('Developer.SwitchTheme')}
+          testID={testIdWithKey('ToggleTheme')}
+        >
+          <Switch
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={
+              themeName === BCThemeNames.BCSC ? ColorPalette.brand.primary : ColorPalette.grayscale.mediumGrey
+            }
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
+            onValueChange={toggleTheme}
+            value={themeName === BCThemeNames.BCSC}
+          />
+        </SectionRow>
+
+        <SectionRow
+          title={t('Developer.SwitchMode')}
+          accessibilityLabel={t('Developer.SwitchMode')}
+          testID={testIdWithKey('ToggleMode')}
+        >
+          <Switch
+            trackColor={{ false: ColorPalette.grayscale.lightGrey, true: ColorPalette.brand.primaryDisabled }}
+            thumbColor={!BCSCMode ? ColorPalette.grayscale.mediumGrey : ColorPalette.brand.primary}
+            ios_backgroundColor={ColorPalette.grayscale.lightGrey}
+            onValueChange={toggleMode}
+            value={BCSCMode}
           />
         </SectionRow>
       </ScrollView>
@@ -394,4 +541,4 @@ const Settings: React.FC = () => {
   )
 }
 
-export default Settings
+export default Developer

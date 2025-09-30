@@ -1,17 +1,18 @@
-import { testIdWithKey } from '@hyperledger/aries-bifold-core'
+import { testIdWithKey } from '@bifold/core'
 import React, { useEffect, useRef } from 'react'
-import { View, StyleSheet, Animated } from 'react-native'
+import { Animated, StyleSheet, View } from 'react-native'
 
-import ActivityIndicator from '../assets/img/activity-indicator-circle.svg'
+import ActivityIndicator from '@assets/img/activity-indicator-circle.svg'
+
+const timing: Animated.TimingAnimationConfig = {
+  toValue: 1,
+  duration: 2000,
+  useNativeDriver: true,
+}
 
 const Spinner = () => {
-  const rotationAnim = useRef(new Animated.Value(0)).current
-  const timing: Animated.TimingAnimationConfig = {
-    toValue: 1,
-    duration: 2000,
-    useNativeDriver: true,
-  }
-  const rotation = rotationAnim.interpolate({
+  const rotationAnim = useRef(new Animated.Value(0))
+  const rotation = rotationAnim.current.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   })
@@ -26,7 +27,7 @@ const Spinner = () => {
   }
 
   useEffect(() => {
-    Animated.loop(Animated.timing(rotationAnim, timing)).start()
+    Animated.loop(Animated.timing(rotationAnim.current, timing)).start()
   }, [rotationAnim])
 
   return (

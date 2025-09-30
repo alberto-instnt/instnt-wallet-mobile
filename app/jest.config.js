@@ -11,9 +11,9 @@ module.exports = {
     axios: require.resolve('axios'),
     'react-i18next': '<rootDir>/__mocks__/react-i18next.ts',
     '^uuid$': require.resolve('uuid'),
-    '@aries-framework/core': require.resolve('@aries-framework/core'),
-    '@aries-framework/anoncreds': require.resolve('@aries-framework/anoncreds'),
-    '@hyperledger/aries-bifold-core': require.resolve('@hyperledger/aries-bifold-core'),
+    '@credo-ts/core': require.resolve('@credo-ts/core'),
+    '@credo-ts/anoncreds': require.resolve('@credo-ts/anoncreds'),
+    '@bifold/core': require.resolve('@bifold/core'),
     '@hyperledger/aries-askar-react-native': require.resolve('@hyperledger/aries-askar-react-native'),
   },
   transform: {
@@ -23,12 +23,6 @@ module.exports = {
     'node_modules\\/(?!(.*react-native.*)|(uuid)|(@aries-framework\\/core)|(@aries-framework\\/anoncreds)|(@hyperledger\\/aries-bifold-core))',
   ],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
-  testPathIgnorePatterns: [
-    '\\.snap$',
-    '<rootDir>/node_modules/',
-    '<rootDir>/lib',
-    '<rootDir>/__tests__/contexts/',
-    '<rootDir>/__tests__/helpers/',
-  ],
+  testPathIgnorePatterns: ['\\.snap$', '<rootDir>/node_modules/', '<rootDir>/lib', '<rootDir>/__tests__/contexts/'],
   cacheDirectory: '.jest/cache',
 }

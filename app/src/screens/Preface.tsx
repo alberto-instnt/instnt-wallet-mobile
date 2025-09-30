@@ -1,36 +1,37 @@
 import {
-  useTheme,
-  useStore,
-  testIdWithKey,
-  DispatchAction,
-  Screens,
-  CheckBoxRow,
   Button,
   ButtonType,
+  CheckBoxRow,
+  DispatchAction,
   Link,
-  OnboardingStackParams,
-} from '@hyperledger/aries-bifold-core'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-import React, { useRef, useState } from 'react'
+  testIdWithKey,
+  useDeveloperMode,
+  DeveloperModal,
+  useStore,
+  useTheme,
+} from '@bifold/core'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Linking, Pressable, ScrollView, StyleSheet, Text, Vibration, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Preface: React.FC = () => {
   const [, dispatch] = useStore()
   const [checked, setChecked] = useState(false)
+  const [devModalVisible, setDevModalVisible] = useState(false)
+  const onBackPressed = () => setDevModalVisible(false)
+  const onDevModeTriggered = () => {
+    Vibration.vibrate()
+    setDevModalVisible(true)
+  }
+  const { incrementDeveloperMenuCounter } = useDeveloperMode(onDevModeTriggered)
   const { t } = useTranslation()
-  const developerOptionCount = useRef(0)
-  const touchCountToEnableBiometrics = 9
-  const navigation = useNavigation<StackNavigationProp<OnboardingStackParams>>()
   const { Assets, OnboardingTheme, TextTheme } = useTheme()
 
   const onSubmitPressed = () => {
     dispatch({
       type: DispatchAction.DID_SEE_PREFACE,
     })
-    navigation.navigate(Screens.Onboarding)
   }
 
   const onPressInfoLink = () => {
@@ -39,20 +40,6 @@ const Preface: React.FC = () => {
 
   const onPressShowcaseLink = () => {
     Linking.openURL('https://digital.gov.bc.ca/digital-trust/showcase/')
-  }
-
-  const incrementDeveloperMenuCounter = () => {
-    if (developerOptionCount.current >= touchCountToEnableBiometrics) {
-      developerOptionCount.current = 0
-      dispatch({
-        type: DispatchAction.ENABLE_DEVELOPER_MODE,
-        payload: [true],
-      })
-      navigation.navigate(Screens.Developer)
-      return
-    }
-
-    developerOptionCount.current = developerOptionCount.current + 1
   }
 
   const style = StyleSheet.create({
@@ -75,7 +62,7 @@ const Preface: React.FC = () => {
           <View style={style.contentContainer}>
             <Assets.svg.preface style={{ alignSelf: 'center', marginBottom: 20 }} height={200} />
             <Pressable onPress={incrementDeveloperMenuCounter} testID={testIdWithKey('DeveloperCounter')}>
-              <Text style={[TextTheme.headingTwo]}>{t('Preface.PrimaryHeading')}</Text>
+              <Text style={TextTheme.headingTwo}>{t('Preface.PrimaryHeading')}</Text>
             </Pressable>
             <Text style={[TextTheme.normal, { marginTop: 10, marginBottom: 10 }]}>{t('Preface.Paragraph1')}</Text>
             <Link style={{ marginTop: 10, marginBottom: 10 }} onPress={onPressInfoLink} linkText={t('Preface.Link1')} />
@@ -92,7 +79,7 @@ const Preface: React.FC = () => {
               reverse
               titleStyle={{ fontWeight: 'bold' }}
             />
-            <View style={[{ paddingTop: 10 }]}>
+            <View style={{ paddingTop: 10 }}>
               <Button
                 title={t('Global.Continue')}
                 accessibilityLabel={t('Global.Continue')}
@@ -105,6 +92,7 @@ const Preface: React.FC = () => {
           </View>
         </View>
       </ScrollView>
+      {devModalVisible ? <DeveloperModal onBackPressed={onBackPressed} /> : null}
     </SafeAreaView>
   )
 }

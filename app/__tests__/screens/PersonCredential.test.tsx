@@ -1,10 +1,9 @@
-import { StoreProvider } from '@hyperledger/aries-bifold-core'
 import { render } from '@testing-library/react-native'
 import React from 'react'
 
-import PersonCredential from '../../src/screens/PersonCredential'
-import { AttestationProvider } from '../../src/services/attestation'
-import { initialState, reducer } from '../../src/store'
+import { useNavigation } from '../../__mocks__/custom/@react-navigation/core'
+import { BasicAppContext } from '../../__mocks__/helpers/app'
+import PersonCredential from '../../src/bcwallet-theme/features/person-flow/screens/PersonCredential'
 
 const mockNavigation = jest.fn()
 jest.mock('@react-navigation/native', () => ({
@@ -28,12 +27,11 @@ describe('Person Credential Screen', () => {
   })
 
   test('screen renders correctly', () => {
+    const navigation = useNavigation()
     const tree = render(
-      <StoreProvider initialState={initialState} reducer={reducer}>
-        <AttestationProvider>
-          <PersonCredential />
-        </AttestationProvider>
-      </StoreProvider>
+      <BasicAppContext>
+        <PersonCredential navigation={navigation as never} route={{} as never} />
+      </BasicAppContext>
     )
 
     expect(tree).toMatchSnapshot()

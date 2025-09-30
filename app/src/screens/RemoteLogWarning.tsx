@@ -1,11 +1,10 @@
-import { useTheme, testIdWithKey, CheckBoxRow, Button, ButtonType, Link } from '@hyperledger/aries-bifold-core'
+import { useTheme, testIdWithKey, CheckBoxRow, Button, ButtonType, Link, FauxHeader } from '@bifold/core'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import ErrorTextBox from '../components/ErrorTextBox'
-import FauxHeader from '../components/FauxHeader'
+import ErrorTextBox from '@components/ErrorTextBox'
 
 type RemoteLogWarningProps = {
   onBackPressed: () => void
@@ -15,7 +14,7 @@ type RemoteLogWarningProps = {
 const RemoteLogWarning: React.FC<RemoteLogWarningProps> = ({ onBackPressed, onEnablePressed }) => {
   const [checked, setChecked] = useState(false)
   const { t } = useTranslation()
-  const { TextTheme, ColorPallet } = useTheme()
+  const { TextTheme, ColorPalette, NavigationTheme } = useTheme()
 
   const onSubmitPressed = () => {
     onEnablePressed()
@@ -38,10 +37,10 @@ const RemoteLogWarning: React.FC<RemoteLogWarningProps> = ({ onBackPressed, onEn
   })
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: ColorPallet.brand.primary }} edges={['top', 'right', 'left']}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: ColorPallet.brand.primaryBackground }} edges={['bottom']}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: NavigationTheme.colors.primary }} edges={['top', 'right', 'left']}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: ColorPalette.brand.primaryBackground }} edges={['bottom']}>
         <FauxHeader title={t('RemoteLogging.ScreenTitle')} onBackPressed={onBackPressed} />
-        <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: ColorPallet.brand.primaryBackground }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: ColorPalette.brand.primaryBackground }}>
           <View style={style.screenContainer}>
             <View style={style.contentContainer}>
               <Text style={[TextTheme.headingTwo, { marginBottom: 10 }]}>{t('RemoteLogging.Heading')}</Text>

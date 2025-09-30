@@ -1,31 +1,41 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { AnonCredsCredentialMetadataKey } from '@aries-framework/anoncreds/build/utils/metadata'
+import {
+  components,
+  ContainerProvider,
+  contexts,
+  MainContainer,
+  StoreContext,
+  ThemeProvider,
+  TOKENS,
+} from '@bifold/core'
+import { BrandingOverlayType, RemoteOCABundleResolver } from '@bifold/oca/build/legacy'
+import { AnonCredsCredentialMetadataKey } from '@credo-ts/anoncreds/build/utils/metadata'
 import {
   CredentialExchangeRecord,
   CredentialExchangeRecordProps,
   CredentialPreviewAttribute,
+  CredentialRole,
   CredentialState,
   RevocationNotification,
-} from '@aries-framework/core'
-import {
-  components,
-  ConfigurationContext,
-  ConfigurationProvider,
-  StoreContext,
-  contexts,
-  ThemeProvider,
-} from '@hyperledger/aries-bifold-core'
-import { BrandingOverlayType, RemoteOCABundleResolver } from '@hyperledger/aries-oca/build/legacy'
+} from '@credo-ts/core'
 import { select } from '@storybook/addon-knobs'
 import { storiesOf } from '@storybook/react-native'
-import React, { Dispatch, useEffect, useState } from 'react'
+import React, { Dispatch, PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ListRenderItem, View } from 'react-native'
 import { Config } from 'react-native-config'
+import { container } from 'tsyringe'
 
-import bcwallet from '../../../src'
+import { BCThemeNames } from '@/constants'
+import { themes } from '@/theme'
 
-const { theme } = bcwallet
+const OCABundleResolver = new RemoteOCABundleResolver(Config.OCA_URL ?? '', {
+  brandingOverlayType: BrandingOverlayType.Branding10,
+})
+const BasicAppContext: React.FC<PropsWithChildren> = ({ children }) => {
+  const context = useMemo(() => new MainContainer(container.createChildContainer()).init(), [])
+  context.container.registerInstance(TOKENS.UTIL_OCA_RESOLVER, OCABundleResolver)
+  return <ContainerProvider value={context}>{children}</ContainerProvider>
+}
 
 enum CREDENTIALS {
   LSBC_TEST = 'AuJrigKQGRLJajKAebTgWu:3:CL:209526:default',
@@ -74,6 +84,7 @@ const CredentialWrapper = ({
 }: CredentialProps) => {
   const indyCredential = { credentialRecordType: 'indy', credentialRecordId }
   const props: CredentialExchangeRecordProps = {
+    role: CredentialRole.Issuer,
     connectionId: connectionId,
     threadId: '',
     state: CredentialState.CredentialIssued,
@@ -140,7 +151,7 @@ const Credentials = ({ items }: CredentialsProps) => {
       setLoaded(true)
     }
     changeFlag()
-  }, [lang])
+  }, [lang, i18n])
   return (
     <>
       {isLoaded && (
@@ -150,16 +161,8 @@ const Credentials = ({ items }: CredentialsProps) => {
   )
 }
 
-const OCABundleResolver = new RemoteOCABundleResolver(Config.OCA_URL ?? '', {
-  brandingOverlayType: BrandingOverlayType.Branding10,
-})
-
 storiesOf('Brandings', module)
   .add('All', () => {
-    const configuration: ConfigurationContext = {
-      OCABundleResolver: OCABundleResolver,
-    } as unknown as ConfigurationContext
-
     const state = contexts.store.defaultState
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dispatch: Dispatch<any> = () => {
@@ -235,20 +238,16 @@ storiesOf('Brandings', module)
       },
     ]
     return (
-      <ConfigurationProvider value={configuration}>
+      <BasicAppContext>
         <StoreContext.Provider value={[state, dispatch]}>
-          <ThemeProvider value={theme}>
+          <ThemeProvider themes={themes} defaultThemeName={BCThemeNames.BCWallet}>
             <Credentials items={list} />
           </ThemeProvider>
         </StoreContext.Provider>
-      </ConfigurationProvider>
+      </BasicAppContext>
     )
   })
   .add('Person: Default', (): React.ReactNode => {
-    const configuration: ConfigurationContext = {
-      OCABundleResolver: OCABundleResolver,
-    } as unknown as ConfigurationContext
-
     const state = contexts.store.defaultState
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dispatch: Dispatch<any> = () => {
@@ -263,21 +262,17 @@ storiesOf('Brandings', module)
     ]
     return (
       <>
-        <ConfigurationProvider value={configuration}>
+        <BasicAppContext>
           <StoreContext.Provider value={[state, dispatch]}>
-            <ThemeProvider value={theme}>
+            <ThemeProvider themes={themes} defaultThemeName={BCThemeNames.BCWallet}>
               <Credentials items={list} />
             </ThemeProvider>
           </StoreContext.Provider>
-        </ConfigurationProvider>
+        </BasicAppContext>
       </>
     )
   })
   .add('Person: Revoked', (): React.ReactNode => {
-    const configuration: ConfigurationContext = {
-      OCABundleResolver: OCABundleResolver,
-    } as unknown as ConfigurationContext
-
     const state = contexts.store.defaultState
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dispatch: Dispatch<any> = () => {
@@ -291,10 +286,10 @@ storiesOf('Brandings', module)
       },
     ]
     return (
-      <ConfigurationProvider value={configuration}>
+      <BasicAppContext>
         <StoreContext.Provider value={[state, dispatch]}>
           <Credentials items={list} />
         </StoreContext.Provider>
-      </ConfigurationProvider>
+      </BasicAppContext>
     )
   })

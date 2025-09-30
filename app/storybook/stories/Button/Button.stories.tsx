@@ -1,10 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { components, ThemeProvider } from '@hyperledger/aries-bifold-core'
+import { components, ThemeProvider } from '@bifold/core'
 import { storiesOf } from '@storybook/react-native'
 import React from 'react'
-import { SafeAreaView, ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { defaultTheme as theme } from '../../../src/theme'
+import { BCThemeNames } from '@/constants'
+import { themes } from '@/theme'
+
 const Button = components.buttons.Button.default
 const ButtonType = components.buttons.Button.ButtonType
 
@@ -32,7 +35,7 @@ storiesOf('Button', module)
       }
     }
     return (
-      <ThemeProvider value={theme}>
+      <ThemeProvider themes={themes} defaultThemeName={BCThemeNames.BCWallet}>
         <SafeAreaView>
           <ScrollView>
             <View style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20, paddingBottom: 20 }}>{items}</View>

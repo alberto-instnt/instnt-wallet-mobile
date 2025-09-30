@@ -1,10 +1,9 @@
-import { StoreProvider } from '@hyperledger/aries-bifold-core'
+import { AuthProvider } from '@bifold/core'
 import { render } from '@testing-library/react-native'
 import React from 'react'
 
 import Developer from '../../src/screens/Developer'
-import { AttestationProvider } from '../../src/services/attestation'
-import { initialState, reducer } from '../../src/store'
+import { BasicAppContext } from '../../__mocks__/helpers/app'
 
 const mockNavigation = jest.fn()
 jest.mock('@react-navigation/native', () => ({
@@ -29,11 +28,11 @@ describe('Developer Screen', () => {
 
   test('screen renders correctly', () => {
     const tree = render(
-      <StoreProvider initialState={initialState} reducer={reducer}>
-        <AttestationProvider>
+      <BasicAppContext>
+        <AuthProvider>
           <Developer />
-        </AttestationProvider>
-      </StoreProvider>
+        </AuthProvider>
+      </BasicAppContext>
     )
 
     expect(tree).toMatchSnapshot()

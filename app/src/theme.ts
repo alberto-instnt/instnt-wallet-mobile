@@ -1,17 +1,7 @@
-import {
-  ImageAssets as BifoldImageAssets,
-  IInputs,
-  ITextTheme,
-  IBrandColors,
-  ISemanticColors,
-  INotificationColors,
-  IGrayscaleColors,
-  IColorPallet,
-  ITheme,
-  IAssets,
-} from '@hyperledger/aries-bifold-core'
-import React from 'react'
-import { StyleSheet } from 'react-native'
+// Merge both the changes
+import { BCSCTheme } from '@bcsc-theme/theme'
+import { BCWalletTheme } from '@bcwallet-theme/theme'
+import { ITheme, ISemanticColors, INotificationColors, IGrayscaleColors, IBrandColors, IColorPallet, ITextTheme, IInputs, IAssets } from '@bifold/core'
 
 import Logo from './assets/img/logo.svg'
 
@@ -730,3 +720,4 @@ export const defaultTheme: ITheme = {
   PINInputTheme,
   Assets,
 }
+export const themes: ITheme[] = [BCWalletTheme, BCSCTheme]

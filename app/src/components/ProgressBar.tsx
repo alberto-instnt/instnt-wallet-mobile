@@ -1,13 +1,14 @@
-import { useTheme } from '@hyperledger/aries-bifold-core'
+import { useTheme } from '@bifold/core'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Animated, useWindowDimensions } from 'react-native'
 
 export interface ProgressBarProps {
   progressPercent: number
+  dark?: boolean
 }
 
-const ProgressBar = ({ progressPercent }: ProgressBarProps) => {
-  const { ColorPallet } = useTheme()
+const ProgressBar = ({ progressPercent, dark = false }: ProgressBarProps) => {
+  const { ColorPalette } = useTheme()
   const { width: windowWidth } = useWindowDimensions()
   const [progressBarScale] = useState(new Animated.Value(0))
 
@@ -17,18 +18,18 @@ const ProgressBar = ({ progressPercent }: ProgressBarProps) => {
       duration: 300,
       useNativeDriver: true, // allows for much smoother animation
     }).start()
-  }, [progressPercent])
+  }, [progressPercent, progressBarScale])
 
   const styles = StyleSheet.create({
     progressBarContainer: {
       width: '100%',
       height: 11,
-      backgroundColor: '#001e3d',
+      backgroundColor: dark ? '#001e3d' : ColorPalette.brand.primaryBackground,
     },
     progressBar: {
       height: '100%',
       width: '100%',
-      backgroundColor: ColorPallet.brand.highlight,
+      backgroundColor: ColorPalette.brand.highlight,
     },
   })
   // scaleX rather than width is used for the progress bar as this allows useNativeDriver to be true

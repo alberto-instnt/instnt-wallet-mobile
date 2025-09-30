@@ -50,6 +50,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>ca.bc.gov.id.servicescard</string>
+		<string>ca.bc.gov.iddev.servicescard</string>
+		<string>ca.bc.gov.iddev.servicescard.v2</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -66,12 +68,18 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to Bluetooth to manage audio routing during calls</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to Bluetooth to connect to audio devices during calls</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera used for in-app QR Code scanning</string>
+	<string>Camera used for QR Code scanning and video calls</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) wants to use your FaceID/TouchID to authenticate your identity</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We include this permission because a library our app uses references it, even though we don't use it directly</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your microphone to enable video calls</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MaterialIcons.ttf</string>
@@ -82,7 +90,11 @@
 		<string>BCSans-Regular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
-	<array/>
+	<array>
+		<string>remote-notification</string>
+		<string>audio</string>
+		<string>voip</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

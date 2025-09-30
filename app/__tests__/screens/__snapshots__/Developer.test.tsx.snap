@@ -3,31 +3,23 @@
 exports[`Developer Screen screen renders correctly 1`] = `
 <RNCSafeAreaView
   edges={
-    [
-      "bottom",
-      "left",
-      "right",
-    ]
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "off",
+    }
+  }
+  style={
+    {
+      "flex": 1,
+    }
   }
 >
-  <Modal
-    animationType="fade"
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={false}
-    visible={false}
-  />
-  <Modal
-    animationType="slide"
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={false}
-    visible={false}
-  />
   <RCTScrollView
     style={
       {
-        "backgroundColor": "#000000",
+        "backgroundColor": "#F2F2F2",
         "width": "100%",
       }
     }
@@ -35,12 +27,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
     <View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -53,9 +43,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -108,7 +99,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -121,7 +112,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
                   },
                 ]
               }
-              thumbTintColor="#42803E"
+              thumbTintColor="#003366"
               tintColor="#D3D3D3"
               value={true}
             />
@@ -130,18 +121,16 @@ exports[`Developer Screen screen renders correctly 1`] = `
       </View>
       <View
         style={
-          [
-            {
-              "marginBottom": 10,
-            },
-          ]
+          {
+            "marginBottom": 10,
+          }
         }
       />
       <View
         style={
           [
             {
-              "backgroundColor": "#313132",
+              "backgroundColor": "#FFFFFF",
               "padding": 24,
             },
             {
@@ -162,7 +151,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
                 "fontSize": 24,
               },
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "marginRight": 10,
               },
               {
@@ -180,7 +169,8 @@ exports[`Developer Screen screen renders correctly 1`] = `
           style={
             [
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 26,
                 "fontWeight": "bold",
               },
@@ -195,12 +185,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -213,9 +201,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -267,39 +256,36 @@ exports[`Developer Screen screen renders correctly 1`] = `
               style={
                 [
                   {
-                    "color": "#FFFFFF",
+                    "color": "#313132",
+                    "fontFamily": "BCSans-Regular",
                     "fontSize": 21,
                     "fontWeight": "bold",
                   },
                   {
-                    "color": "#FFFFFF",
+                    "color": "#1A5A96",
                     "fontWeight": "normal",
                   },
                 ]
               }
             >
-              Production
+              Test
             </Text>
           </View>
         </View>
       </View>
       <View
         style={
-          [
-            {
-              "marginBottom": 10,
-            },
-          ]
+          {
+            "marginBottom": 10,
+          }
         }
       />
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -312,9 +298,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -367,7 +354,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -390,30 +377,26 @@ exports[`Developer Screen screen renders correctly 1`] = `
       <View
         style={
           {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#FFFFFF",
           }
         }
       >
         <View
           style={
-            [
-              {
-                "borderBottomColor": "#000000",
-                "borderBottomWidth": 1,
-                "marginHorizontal": 24,
-              },
-            ]
+            {
+              "borderBottomColor": "#F2F2F2",
+              "borderBottomWidth": 1,
+              "marginHorizontal": 24,
+            }
           }
         />
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -426,9 +409,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -481,7 +465,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -504,30 +488,26 @@ exports[`Developer Screen screen renders correctly 1`] = `
       <View
         style={
           {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#FFFFFF",
           }
         }
       >
         <View
           style={
-            [
-              {
-                "borderBottomColor": "#000000",
-                "borderBottomWidth": 1,
-                "marginHorizontal": 24,
-              },
-            ]
+            {
+              "borderBottomColor": "#F2F2F2",
+              "borderBottomWidth": 1,
+              "marginHorizontal": 24,
+            }
           }
         />
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -540,9 +520,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -595,7 +576,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -618,30 +599,26 @@ exports[`Developer Screen screen renders correctly 1`] = `
       <View
         style={
           {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#FFFFFF",
           }
         }
       >
         <View
           style={
-            [
-              {
-                "borderBottomColor": "#000000",
-                "borderBottomWidth": 1,
-                "marginHorizontal": 24,
-              },
-            ]
+            {
+              "borderBottomColor": "#F2F2F2",
+              "borderBottomWidth": 1,
+              "marginHorizontal": 24,
+            }
           }
         />
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -654,9 +631,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -709,7 +687,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -732,30 +710,26 @@ exports[`Developer Screen screen renders correctly 1`] = `
       <View
         style={
           {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#FFFFFF",
           }
         }
       >
         <View
           style={
-            [
-              {
-                "borderBottomColor": "#000000",
-                "borderBottomWidth": 1,
-                "marginHorizontal": 24,
-              },
-            ]
+            {
+              "borderBottomColor": "#F2F2F2",
+              "borderBottomWidth": 1,
+              "marginHorizontal": 24,
+            }
           }
         />
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -768,9 +742,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -823,7 +798,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -846,30 +821,26 @@ exports[`Developer Screen screen renders correctly 1`] = `
       <View
         style={
           {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#FFFFFF",
           }
         }
       >
         <View
           style={
-            [
-              {
-                "borderBottomColor": "#000000",
-                "borderBottomWidth": 1,
-                "marginHorizontal": 24,
-              },
-            ]
+            {
+              "borderBottomColor": "#F2F2F2",
+              "borderBottomWidth": 1,
+              "marginHorizontal": 24,
+            }
           }
         />
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -882,9 +853,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -937,7 +909,7 @@ exports[`Developer Screen screen renders correctly 1`] = `
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
               style={
                 [
                   {
@@ -960,30 +932,26 @@ exports[`Developer Screen screen renders correctly 1`] = `
       <View
         style={
           {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#FFFFFF",
           }
         }
       >
         <View
           style={
-            [
-              {
-                "borderBottomColor": "#000000",
-                "borderBottomWidth": 1,
-                "marginHorizontal": 24,
-              },
-            ]
+            {
+              "borderBottomColor": "#F2F2F2",
+              "borderBottomWidth": 1,
+              "marginHorizontal": 24,
+            }
           }
         />
       </View>
       <View
         style={
-          [
-            {
-              "backgroundColor": "#313132",
-              "padding": 24,
-            },
-          ]
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
         }
       >
         <View
@@ -996,9 +964,10 @@ exports[`Developer Screen screen renders correctly 1`] = `
           <Text
             style={
               {
-                "color": "#FFFFFF",
+                "color": "#313132",
                 "flex": 1,
                 "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
                 "fontSize": 21,
                 "fontWeight": "normal",
               }
@@ -1048,11 +1017,481 @@ exports[`Developer Screen screen renders correctly 1`] = `
           >
             <RCTSwitch
               accessibilityRole="switch"
+              onChange={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              onTintColor="#757575"
+              style={
+                [
+                  {
+                    "height": 31,
+                    "width": 51,
+                  },
+                  {
+                    "backgroundColor": "#D3D3D3",
+                    "borderRadius": 16,
+                  },
+                ]
+              }
+              thumbTintColor="#606060"
+              tintColor="#D3D3D3"
+              value={false}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#313132",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
+                "fontSize": 21,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            PasteUrl.UseShareableLink
+          </Text>
+          <View
+            accessibilityLabel="PasteUrl.UseShareableLink"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+            testID="com.ariesbifold:id/ToggleUseShareableLink"
+          >
+            <RCTSwitch
+              accessibilityRole="switch"
               disabled={true}
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="rgba(53, 130, 63, 0.35)"
+              onTintColor="#757575"
+              style={
+                [
+                  {
+                    "height": 31,
+                    "width": 51,
+                  },
+                  {
+                    "backgroundColor": "#D3D3D3",
+                    "borderRadius": 16,
+                  },
+                ]
+              }
+              thumbTintColor="#606060"
+              tintColor="#D3D3D3"
+              value={false}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#313132",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
+                "fontSize": 21,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            Developer.EnableProxy
+          </Text>
+          <View
+            accessibilityLabel="Developer.EnableProxy"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+            testID="com.ariesbifold:id/ToggleEnableProxy"
+          >
+            <RCTSwitch
+              accessibilityRole="switch"
+              onChange={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              onTintColor="#757575"
+              style={
+                [
+                  {
+                    "height": 31,
+                    "width": 51,
+                  },
+                  {
+                    "backgroundColor": "#D3D3D3",
+                    "borderRadius": 16,
+                  },
+                ]
+              }
+              thumbTintColor="#606060"
+              tintColor="#D3D3D3"
+              value={false}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#313132",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
+                "fontSize": 21,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            Developer.EnableAppToAppPersonFlow
+          </Text>
+          <View
+            accessibilityLabel="Developer.EnableAppToAppPersonFlow"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+            testID="com.ariesbifold:id/ToggleEnableAppToAppPersonFlow"
+          >
+            <RCTSwitch
+              accessibilityRole="switch"
+              onChange={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              onTintColor="#757575"
+              style={
+                [
+                  {
+                    "height": 31,
+                    "width": 51,
+                  },
+                  {
+                    "backgroundColor": "#D3D3D3",
+                    "borderRadius": 16,
+                  },
+                ]
+              }
+              thumbTintColor="#606060"
+              tintColor="#D3D3D3"
+              value={false}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#313132",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
+                "fontSize": 21,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            Developer.SwitchTheme
+          </Text>
+          <View
+            accessibilityLabel="Developer.SwitchTheme"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+            testID="com.ariesbifold:id/ToggleTheme"
+          >
+            <RCTSwitch
+              accessibilityRole="switch"
+              onChange={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              onTintColor="#757575"
+              style={
+                [
+                  {
+                    "height": 31,
+                    "width": 51,
+                  },
+                  {
+                    "backgroundColor": "#D3D3D3",
+                    "borderRadius": 16,
+                  },
+                ]
+              }
+              thumbTintColor="#606060"
+              tintColor="#D3D3D3"
+              value={false}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "padding": 24,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#313132",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "fontFamily": "BCSans-Regular",
+                "fontSize": 21,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            Developer.SwitchMode
+          </Text>
+          <View
+            accessibilityLabel="Developer.SwitchMode"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+            testID="com.ariesbifold:id/ToggleMode"
+          >
+            <RCTSwitch
+              accessibilityRole="switch"
+              onChange={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              onTintColor="#757575"
               style={
                 [
                   {

@@ -21,6 +21,12 @@ const translation = {
     "Message2028": "There was a problem receiving the attestation invitation to connect.",
     "Title2029": "Unable to handle attestation proof",
     "Message2029": "There was a problem while handling an attestation proof request.",
+    "Title2030": "Unable to complete app initialization",
+    "Message2030": "There was a problem while initializing the app.",
+    "Title2031": "Unable to complete agent initialization",
+    "Message2031": "There was a problem while initializing the agent.",
+    "Title2032": "Unable to open app-to-app URL",
+    "Message2032": "There was a problem while opening the app-to-app URL.",
     "NoMessage": "No Message",
   },
   "CameraDisclosure": {
@@ -52,6 +58,10 @@ const translation = {
     "InstntMultipassParagraph": "Instnt Multipass (tm) allows you to signup and be accepted by businesses with one click or a scan of a QR-code. Signup once for a product or service of a business with Instnt, get verified, and potentially never signup again as you access other products or services from the same business or other businesses. Instnt uses advanced block-chain based decentralized identity technology and verifiable credential standards to make single signup possible.",
     "PrivateConfidentialHeading": "What is decentralized identity and verifiable credential?",
     "PrivateConfidentialParagraph": "Instnt makes it possible for businesses to trust that you were verified in a reliable way for KYC compliance and fraud prevention and to share that trust using secure, managed blockchain-based technology, in a decentralized manner. \n\nWith verifiable credential and embedded toolkit technology you end up owning your own identity data and the proof that that data was verified (and who verified it) in a the form of digital  credentials, much like your driver license in a physical wallet. Your data is securely encrypted and stored in your wallet so it can never be stolen by data breaches at businesses.",
+    "DifferentWalletHeading": "A different smart wallet",
+    "DifferentWalletParagraph": "Unlike other digital wallets, BC Wallet helps you prove who you are in-person or online by storing and using digital credentials issued by participating services.\n\nInteract with confidence with individuals and organizations you trust.",
+    "DigitalCredentialsHeading": "Digital credentials",
+    "DigitalCredentialsParagraph": "Digital credentials are the electronic equivalent of physical credentials such as certifications and permits offered by participating services.\n\nServices are simplified and expedited as organizations and individuals can confirm who you are with trusted information from digital credentials.",
     "GetStarted": "Get Started",
   },
   "Preface": {
@@ -65,6 +75,30 @@ const translation = {
     "Terms": "Terms of Use",
     "Settings": "Menu",
     "Preface": "Instnt Wallet",
+    "VerificationSteps": "Setup steps",
+    "EvidenceCollectionStep": {
+      "Stage1": "Choose your identification",
+      "Stage2": "Instructions",
+      "Stage3": "Scan your identification",
+      "Stage4": "Enter serial number",
+      "Stage5": "Enter birthdate",
+    },
+    "ResidentialAddressStep": {
+      "Stage1": "TODO",
+    },
+    "EmailStep": {
+      "Stage1": "TODO",
+    },
+    "VerifyIdentityStep": {
+      "Stage1": "TODO",
+    },
+  },
+  "PINCreate": {
+    "Explainer": {
+      "PrimaryHeading": "Create a PIN that is:",
+      "Bullet1": "<b>Memorable.</b> If you forget your PIN, you can't recover it. You will need to reinstall and set up your wallet again.",
+      "Bullet2": "<b>Unique.</b> Your PIN prevents people from accessing your digital credentials. Do not share it with anyone.",
+    }
   },
   "PersonCredentialNotification": {
     "Title": "Get your Person credential",
@@ -80,6 +114,15 @@ const translation = {
     "StartProcess": "Start the process",
     "PageTitle": "Person Credential",
     "PleaseWait": "Please wait as we get things ready for you",
+    "WhatIsPersonCredentialLink": "What is a Person credential",
+    "WhereToUseLink": "Where to use",
+    "HelpLink": "Help",
+    "EstablishingConnection": "Establishing connection...",
+    "ConnectedToAgent": "Connected to agent...",
+    "WaitingForAppAttestation": "Waiting for app attestation...",
+    "AppAttested": "App attested...",
+    "OfferingCredential": "Offering credential...",
+    "InitiatingAppToAppFlow": "Initiating app-to-app flow...",
   },
   "NetInfo": {
     "NoInternetConnectionTitle": "No internet connection",
@@ -128,6 +171,10 @@ const translation = {
     "DeveloperMode": "Developer mode",
     "Toggle": "Toggle Developer Mode",
     "AttestationSupport": "Attestation support",
+    "EnableProxy": "Enable proxy",
+    "EnableAppToAppPersonFlow": "App-to-app Person flow",
+    "SwitchMode": "Switch mode",
+    "SwitchTheme": "Switch theme",
   },
   "Tips": {
     "Header": "Tips",
@@ -145,19 +192,15 @@ const translation = {
     "Tip11": "You can turn on the camera flash if the QR code is hard to see",
     "Tip12": "If the QR code isn't scanning, try increasing the screen's brightness",
     "Tip13": "Information sent via your wallet is trusted by you and your Contacts you interact with",
-    "Tip14": "Even revoked or expired credentials can be usable if the organisation doesn't request for it",
+    "Tip14": "Even revoked or expired credentials can be usable if the organization doesn't request for it",
   },
   "Init": {
     "Retry": "Retry",
     "Starting": "Starting...",
-    "CheckingAuth": "Checking authentication...",
     "FetchingPreferences": "Fetching preferences...",
     "VerifyingOnboarding": "Verifying onboarding...",
-    "GettingCredentials": "Getting wallet credentials...",
-    "RegisteringTransports": "Registering transports...",
+    "CheckingOCA": "Checking for OCA updates...",
     "InitializingAgent": "Initializing agent...",
-    "ConnectingLedgers": "Connecting to ledgers...",
-    "SettingAgent": "Setting agent...",
     "Finishing": "Finishing..."
   },
   "Feedback": {
@@ -176,6 +219,246 @@ const translation = {
     "WhereToUseLink": "See where you can use Instnt Wallet",
     "BadQRCodeDescription": "Ths QR code scanned doesn't work with Instnt Wallet. Instnt Wallet only works with participating services.\n\nIt currently can't add digital credentials by taking photos of physical ones."
   },
+  "Services": {
+    "CatalogueTitle": "Services",
+    "CatalogueSearch": "Search services",
+    "WantToLogin": "Do you want to log in to",
+    "RequestedInformation": "They will receive the following information:",
+    "FromAccountPrefix": "From your",
+    "FromAccount": "Account",
+    "PrivacyNotice": "Privacy notice",
+    "ReportSuspiciousPrefix": "Not you?",
+    "ReportSuspicious": "Report Suspicious Activity",
+    "NoLoginInstructions": "You will need to go to their website first if you want to log in to it. You can't log in to services directly from this app.",
+    "NoLoginProof": "You will use this app to prove who you are when you log in.",
+    "Goto": "Go to",
+    "NotListed": "Services not listed?",
+    "NotListedDescription": "Services that are only available to specific people or people in specific professions are not listed above.",
+    "NotListedDescriptionContact": "Contact the service to the the link to their website.",
+    "PrivacyPolicy": "Privacy Policy",
+    "LoginErrorTitle": "Unable to quick login to service"
+  },
+  "Unified": {
+    "Steps": {
+      "ScanOrTakePhotos": "Scan or take photos of your ID.",
+      "Step1": "Step 1",
+      "Step2": "Step 2",
+      "Step3": "Step 3",
+      "Step4": "Step 4"
+    },
+    "ChooseYourID": {
+      "WhatCardDoYou": "What BC Services Card do you have?",
+      "SomePeopleStillCallIt": "Some people still call it a CareCard or a Health Card. It has your personal health number (PHN) on the back.",
+      "CombinedCard": "Combined card",
+      "CombinedCardActionText": "It's combined with my driver's licence",
+      "CombinedCardDescription": "Use this card for a faster way to set up the app.",
+      "PhotoCard": "Photo card",
+      "PhotoCardActionText": "A card with my photo",
+      "PhotoCardDescription": "Use this card for a faster way to set up the app.",
+      "NoPhotoCard": "Non photo card",
+      "NoPhotoCardActionText": "A card without a photo",
+      "NoPhotoCardDescription": "Use this card + photo ID to set up the app.",
+      "DontHaveOne": "Don't have one?",
+      "CheckBefore": "Check before you continue. It's faster to set up with one of the above.",
+      "CheckForServicesCard": "Check for BC Services Card",
+      "CheckIfIHave": "Check if I have a BC Services Card",
+      "OtherID": "Other ID",
+      "OtherIDActionText": "Set up with other ID",
+      "OtherIDDescription": "This option takes the longest to set up. You'll need 2 IDs to set up the app and have limited access to services.",
+    },
+    "Instructions": {
+      "Heading": "Provide the card serial number on the back right side of your card.",
+      "Paragraph": "When scanning, you should place the card in front of a white background for best results.",
+      "ScanBarcode": "Scan Barcode with Camera",
+      "EnterManually": "Enter Serial Number Manually",
+    },
+    "Scan": {},
+    "ManualSerial": {
+      "InputLabel": "Serial number",
+      "InputSubText": "Enter the letter and numbers by the barcode on the back of your card.",
+      "EmptySerialError": "Required",
+      "CharCountError": "Cannot exceed 15 characters",
+    },
+    "Birthdate": {
+      "CardSerialNumber": "Card serial number: {{ serial }}",
+      "Heading": "Enter your birthdate",
+      "Paragraph": "Your birthdate is only used to to set up this app. It is not shared.",
+      "InputLabel": "Birthdate",
+    },
+    "AdditionalEvidence": {
+      "Heading": "Additional ID required",
+      "PhotoRequired": "You must provide additional ID because your BC Services Card doesn't have a photo on it.",
+      "PhotoRequiredDescription": "It's needed to verify your identity. You'll be asked to provide one or two government-issued IDs.",
+      "CheckYourID": "Check your ID",
+      "CheckYourIDBullet1": "Has the same name as on your BC Services Card",
+      "CheckYourIDBullet2": "Has a recent photo",
+      "CheckYourIDBullet3": "Is not expired",
+      "LimitedAccess": "Limited access to services",
+      "LimitedAccessDescription": "Some services only accept the app when it's set up with a BC Services Card with a photo.",
+      "ChooseID": "Choose ID",
+    },
+    "DualNonBCSCEvidence": {
+      "Heading": "You must provide two government-issued IDs",
+      "Description": "It's needed to verify your identity.",
+      "CheckYourID": "Check your IDs",
+      "CheckYourIDBullet1": "Both IDs should have the same name",
+      "CheckYourIDBullet2": "At least one must be issued in Canada",
+      "CheckYourIDBullet3": "One must have a recent photo",
+      "CheckYourIDBullet4": "Both must not be expired",
+    },
+    "IDPhotoInformation": {
+      "Heading": "Take a photo of your ID. An agent will look at this photo when verifying your identity.",
+      "IDPhotoInstructionsBullet1": "Center your ID within the frame",
+      "IDPhotoInstructionsBullet2": "Have no other objects in the photo",
+      "IDPhotoInstructionsBullet3": "Make sure the entire ID is visible",
+      "IDPhotoInstructionsBullet4": "Make sure the image is clear without any glare or shadows",
+      "TakePhoto": "Take photo of ID",
+    },
+    "VideoTips": {
+      "PrivatePlace": "Find a private place to talk",
+      "OnlyPerson": "Be the only person in the video",
+      "RemoveGlasses": "Remove your glasses (if possible)"
+    },
+    "VideoCall": {
+      "ServiceBC": "Service BC",
+      "BeforeYouCallTitle": "Before you call",
+      "WiFiRecommended": "Wi-Fi Recommended",
+      "StandardDataCharges": "Standard data charges may apply for calls over a cellular network.",
+      "CellularNetworkWarning": "The app detected you're on a cellular network. ",
+      "FindPrivatePlace": "Find a Private Place to Talk",
+      "MakeSureOnlyYou": "Make sure you'll be the only person in the video.",
+      "HoursOfService": "Hours of Service",
+      "DefaultHours": "Monday to Friday\n7:30am - 5:00pm Pacific Time",
+      "ContactCentrePrivacy": "Contact Centre Privacy",
+      "PrivacyNotice": "During a video call, Service BC will ask for and collect personal information. The personal information you will provide is collected for the purpose of verification of your BC Services Card. This information is collected under the authority of Section 26(c) and 26(e) of the Freedom of Information and Protection of Privacy Act (FIPPA).",
+      "PrivacyContactInfo": "If you have further questions about privacy, please contact Chief Privacy Officer, 100 - 722 Johnson Street, Victoria, BC, V8W 1N1, or by phone\n250-405-3726",
+      "Assistance": "Need assistance?",
+      "StartVideoCallDescription": "Start a video call with a Service BC agent. They will verify your identity to finish setting up this app.",
+      "YouShould": "You should:",
+      "StartCall": "Start call",
+      "StartVideoCall": "Start video call",
+      "OneMomentPlease": "One moment please...",
+      "SettingThingsUp": "We're setting things up for you",
+      "TakingLongerThanUsual": "This is taking longer than usual. Please be patient.",
+      "CreatingSession": "Creating video session...",
+      "ConnectingWebRTC": "Connecting to video service...",
+      "WaitingForAgent": "Waiting for an agent to join...",
+      "Initializing": "Initializing...",
+      "ConnectionError": "Connection Error",
+      "GenericError": "An error occurred",
+      "TryAgain": "Try Again",
+      "GoBack": "Go Back",
+      "AllAgentsBusy": "All agents are busy",
+      "CallUsLater": "Call us later",
+      "AllAgentsBusyMessage": "We're sorry your call couldn't be answered. All of our agents are busy at the moment. Please call us back during our hours of service.",
+      "CurrentlyClosedMessage": "We are currently closed. To talk to one of our agents to verify by video, call us during our hours of service.",
+      "Reminder": "Reminder",
+      "AddCardAgainReminder": "You'll need to add your card again if you don't finish verifying by {{date}}.",
+      "SendVideoInstead": "Send video instead",
+      "CallStates": {
+        "CreatingSession": "Creating video session...",
+        "ConnectingWebRTC": "Connecting to video service...",
+        "WaitingForAgent": "Waiting for an agent to join...",
+        "Initializing": "Initializing...",
+        "CallEnded": "Call ended, checking verification..."
+      },
+      "Loading": {
+        "OneMomentPlease": "One moment please...",
+        "SettingThingsUp": "We're setting things up for you",
+        "TakingLongerThanUsual": "This is taking longer than usual. Please be patient.",
+        "Cancel": "Cancel"
+      },
+      "Banners": {
+        "VideoWillResume": "Video will resume when you return to this app",
+        "AgentCantSeeYou": "Agent can't see you while your video is off",
+        "AgentCantHearYou": "Agent can't hear you while your microphone is muted",
+        "VolumeLow": "Your volume is low, you may need to turn it up to hear the agent"
+      },
+      "Errors": {
+        "ConnectionError": "Connection Error",
+        "ConnectionTimeout": "Connection to video service timed out.",
+        "ConnectionFailed": "Failed to establish video connection.",
+        "SessionFailed": "Service is unavailable.",
+        "CallFailed": "Failed to initiate video call.",
+        "NetworkError": "Network connection is unavailable.",
+        "PermissionDenied": "Camera or microphone access was denied.",
+        "UnexpectedError": "An unexpected error occurred.",
+        "GenericError": "An error occurred",
+        "TryAgain": "Try Again",
+        "GoBack": "Go Back"
+      },
+      "CallBusyOrClosed": {
+        "AllAgentsBusy": "All agents are busy",
+        "CallUsLater": "Call us later",
+        "AllAgentsBusyMessage": "We're sorry your call couldn't be answered. All of our agents are busy at the moment. Please call us back during our hours of service.",
+        "CurrentlyClosedMessage": "We are currently closed. To talk to one of our agents to verify by video, call us during our hours of service.",
+        "HoursOfService": "Hours of Service",
+        "Reminder": "Reminder",
+        "AddCardAgainReminder": "You'll need to add your card again if you don't finish verifying by {{date}}.",
+        "SendVideoInstead": "Send video instead"
+      },
+      "VerifyNotComplete": {
+        "Title": "Verify not complete",
+        "NotVerifiedYet": "Your identity is not verified yet.",
+        "HavingTrouble": "Having trouble?",
+        "TroubleshootingTips": "If you are having issues with audio or video, try out the following tips. If you're still having trouble, call us.",
+        "SendVideoInstead": "Send video instead",
+        "TryAgain": "Try again"
+      }
+    },
+    "EvidenceTypeList": {
+      "Heading": "Choose photo ID",
+      "Description": "Use an ID that has the same name as on your BC Services Card.",
+      "NonBCSCDescription": "Use an ID that has the same name as your first ID.",
+      "FirstID": "Choose your first ID",
+      "SecondID": "Choose your second ID"
+    },
+    "EvidenceIDCollection": {
+      "DocumentNumberSubtext": "For example:",
+      "DocumentNumberError": "Please enter a valid document number",
+
+      "FirstNameLabel": "First name",
+      "FirstNameSubtext": "Your first given name",
+      "FirstNameError": "Please enter a first name",
+
+      "LastNameLabel": "Last name",
+      "LastNameError": "Please enter a last name",
+      "LastNameSubtext": "Also known as surname or family name",
+
+      "BirthDateLabel": "Birth date",
+      "BirthDateSubtext": "Enter your birth date in YYYY-MM-DD format",
+      "BirthDateError": "Please enter a valid birth date (YYYY-MM-DD)",
+
+      "MiddleNamesLabel": "Middle names",
+      "MiddleNamesSubtext": "Additional given names. Only up to 2 are needed",
+      "MiddleNamesError": "Please enter up to two middle names",
+    },
+    "Address": {
+      "Heading": "Address",
+      "Paragraph": "Enter the address of where you live.",
+
+      "StreetAddressLabel": "Street Line 1",
+      "StreetAddressSubtext": "Your residential street address",
+      "StreetAddressRequired": "Please enter a street address",
+
+      "CityLabel": "City",
+      "CitySubtext": "The city of your current address",
+      "CityRequired": "Please enter a city",
+
+      "ProvinceLabel": "Province or Territory",
+      "ProvinceSubtext": "Province or territory. For example, BC or British Columbia",
+      "ProvinceInvalid": "Please enter a valid Canadian province or territory",
+
+      "PostalCodeLabel": "Postal Code",
+      "PostalCodeSubtext": "Your postal code in format A1A 2B2",
+      "PostalCodeInvalid": "Please enter a valid postal code in A1A 2B2 format"
+    },
+    "Account": {
+      "RemoveAccount": "Remove account",
+      "RemoveAccountTitle": "Remove account from this app?",
+      "RemoveAccountParagraph": "To use this app again, you'll need to provide your ID and verify your identity."
+    }
+  },
   "RemoteLogging": {
     "ScreenTitle": "Remote troubleshooting",
     "Heading": "Collection notice",
@@ -192,7 +475,14 @@ const translation = {
   },
   "Home":{
     "Welcome": "Instnt Multipass",
-  }
+  },
+  "AppUpdate": {
+    "Heading": "Update BC Wallet to the latest version",
+    "Body": "BC Wallet was updated with new improvements. Update your app now to enjoy the latest features and enhancements."
+  },
+  "HelpCentre": {
+    "Title": "Help Centre"
+  },
 }
 
 export default translation

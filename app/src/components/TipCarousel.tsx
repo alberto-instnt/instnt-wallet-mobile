@@ -1,4 +1,13 @@
-import React, { FunctionComponent, PropsWithChildren, memo, useEffect, useRef, useState } from 'react'
+import React, {
+  FunctionComponent,
+  PropsWithChildren,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, Text, useWindowDimensions, FlatList, ListRenderItem, AccessibilityInfo } from 'react-native'
 
@@ -78,28 +87,33 @@ const Comp: FunctionComponent<TipProps> = ({ item, width, header }) => {
 }
 
 const Tip = memo<TipProps>(Comp)
+
+const delay = 10000 // ms
+
 const TipCarousel = () => {
   const flatListRef = useRef<FlatList>(null)
   const { width } = useWindowDimensions()
   const [currentPosition, setCurrentPosition] = useState(0)
   const { t } = useTranslation()
-  const delay = 10000 // ms
-  const tips = [
-    {
-      id: '0',
-      showHeader: false,
-      text: t('Tips.GettingReady'),
-    },
-    ...tipOrder.map((num, index) => {
-      return {
-        id: `${index + 1}`,
-        showHeader: true,
-        text: t(`Tips.Tip${num}`),
-      }
-    }),
-  ]
+  const tips = useMemo(
+    () => [
+      {
+        id: '0',
+        showHeader: false,
+        text: t('Tips.GettingReady'),
+      },
+      ...tipOrder.map((num, index) => {
+        return {
+          id: `${index + 1}`,
+          showHeader: true,
+          text: t(`Tips.Tip${num}`),
+        }
+      }),
+    ],
+    [t]
+  )
 
-  const scrolling = () => {
+  const scrolling = useCallback(() => {
     if (flatListRef.current) {
       const newOffset = (currentPosition + 1) * width
       const maxOffset = tips.length * width
@@ -111,7 +125,7 @@ const TipCarousel = () => {
         setCurrentPosition(currentPosition + 1)
       }
     }
-  }
+  }, [currentPosition, width, tips])
 
   // ref used here to prevent interval from using old (initial) state values
   const callbackRef = useRef(scrolling)
@@ -138,7 +152,7 @@ const TipCarousel = () => {
     } else if (currentPosition === 0) {
       AccessibilityInfo.announceForAccessibility(t('Tips.GettingReady'))
     }
-  }, [currentPosition])
+  }, [currentPosition, t])
 
   // translating once here to prevent many repeated translations for each tip item
   const tipHeader = t('Tips.Header')

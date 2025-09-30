@@ -21,6 +21,12 @@ const translation = {
     "Message2028": "There was a problem receiving the attestation invitation to connect. (PT-BR)",
     "Title2029": "Unable to handle attestation proof (PT-BR)",
     "Message2029": "There was a problem while handling an attestation proof request. (PT-BR)",
+    "Title2030": "Unable to complete app initialization (PT-BR)",
+    "Message2030": "There was a problem while initializing the app. (PT-BR)",
+    "Title2031": "Unable to complete agent initialization (PT-BR)",
+    "Message2031": "There was a problem while initializing the agent. (PT-BR)",
+    "Title2032": "Unable to open app-to-app URL (PT-BR)",
+    "Message2032": "There was a problem while opening the app-to-app URL. (PT-BR)",
     "NoMessage": "No Message (PT-BR)",
   },
   "CameraDisclosure": {
@@ -65,6 +71,30 @@ const translation = {
     "Terms": "Terms of Use (PT-BR)",
     "Settings": "Menu (PT-BR)",
     "Preface": "BC Wallet",
+    "VerificationSteps": "Setup steps (PT-BR)",
+    "EvidenceCollectionStep": {
+      "Stage1": "Choose your identification (PT-BR)",
+      "Stage2": "Instructions (PT-BR)",
+      "Stage3": "Scan your identification (PT-BR)",
+      "Stage4": "Enter serial number (PT-BR)",
+      "Stage5": "Enter birthdate (PT-BR)",
+    },
+    "ResidentialAddressStep": {
+      "Stage1": "TODO",
+    },
+    "EmailStep": {
+      "Stage1": "TODO",
+    },
+    "VerifyIdentityStep": {
+      "Stage1": "TODO",
+    },
+  },
+  "PINCreate": {
+    "Explainer": {
+      "PrimaryHeading": "Create a PIN that is: (PT-BR)",
+      "Bullet1": "<b>Memorable.</b> If you forget your PIN, you can't recover it. You will need to reinstall and set up your wallet again. (PT-BR)",
+      "Bullet2": "<b>Unique.</b> Your PIN prevents people from accessing your digital credentials. Do not share it with anyone. (PT-BR)",
+    }
   },
   "PersonCredentialNotification": {
     "Title": "Get your Person credential (PT-BR)",
@@ -72,13 +102,22 @@ const translation = {
   },
   "PersonCredential": {
     "ServicesCardInstalled": "Step 1: BC Services Card app installed (PT-BR)",
-    "InstallServicesCard": "Step 1: Install the BC Services Card app (FR",
+    "InstallServicesCard": "Step 1: Install the BC Services Card app (PT-BR",
     "InstallApp": "Install the app (PT-BR)",
     "AppOnOtherDevice": "I have it on another device (PT-BR)",
     "CreatePersonCred": "Step 2: Create your Person credential (PT-BR)",
     "StartProcess": "Start the process (PT-BR)",
     "PageTitle": "Person Credential (PT-BR)",
     "PleaseWait": "Please wait as we get things ready for you (PT-BR)",
+    "WhatIsPersonCredentialLink": "What is a Person credential (PT-BR)",
+    "WhereToUseLink": "Where to use (PT-BR)",
+    "HelpLink": "Help (PT-BR)",
+    "EstablishingConnection": "Establishing connection... (PT-BR)",
+    "ConnectedToAgent": "Connected to agent... (PT-BR)",
+    "WaitingForAppAttestation": "Waiting for app attestation... (PT-BR)",
+    "AppAttested": "App attested... (PT-BR)",
+    "OfferingCredential": "Offering credential... (PT-BR)",
+    "InitiatingAppToAppFlow": "Initiating app-to-app flow... (PT-BR)",
   },
   "NetInfo": {
     "NoInternetConnectionTitle": "No internet connection (PT-BR)",
@@ -127,6 +166,8 @@ const translation = {
     "DeveloperMode": "Developer mode",
     "Toggle": "Toggle Developer Mode",
     "AttestationSupport": "Attestation support (PT-BR)",
+    "EnableProxy": "Enable proxy (PT-BR)",
+    "EnableAppToAppPersonFlow": "App-to-app Person flow (PT-BR)",
   },
   "Tips": {
     "Header": "Tips (PT-BR)",
@@ -149,14 +190,10 @@ const translation = {
   "Init": {
     "Retry": "Retry (PT-BR)",
     "Starting": "Starting... (PT-BR)",
-    "CheckingAuth": "Checking authentication... (PT-BR)",
     "FetchingPreferences": "Fetching preferences... (PT-BR)",
     "VerifyingOnboarding": "Verifying onboarding... (PT-BR)",
-    "GettingCredentials": "Getting wallet credentials... (PT-BR)",
-    "RegisteringTransports": "Registering transports... (PT-BR)",
+    "CheckingOCA": "Checking for OCA updates... (PT-BR)",
     "InitializingAgent": "Initializing agent... (PT-BR)",
-    "ConnectingLedgers": "Connecting to ledgers... (PT-BR)",
-    "SettingAgent": "Setting agent... (PT-BR)",
     "Finishing": "Finishing... (PT-BR)",
   },
   "Feedback": {
@@ -175,6 +212,246 @@ const translation = {
     "WhereToUseLink": "See where you can use BC Wallet (PT-BR)",
     "BadQRCodeDescription": "Ths QR code scanned doesn't work with BC Wallet. BC Wallet only works with participating services.\n\nIt currently can't add digital credentials by taking photos of physical ones. (PT-BR)"
   },
+  "Services": {
+    "CatalogueTitle": "Services (PT-BR)",
+    "CatalogueSearch": "Search services (PT-BR)",
+    "WantToLogin": "Do you want to log in to (PT-BR)",
+    "RequestedInformation": "They will receive the following information: (PR-BR)",
+    "FromAccountPrefix": "From your (PT-BR)",
+    "FromAccount": "Account (PT-BR)",
+    "PrivacyNotice": "Privacy notice (PT-BR)",
+    "ReportSuspiciousPrefix": "Not you? (PT-BR)",
+    "ReportSuspicious": "Report Suspicious Activity (PT-BR)",
+    "NoLoginInstructions": "You will need to go to their website first if you want to log in to it. You can't log in to services directly from this app. (PT-BR)",
+    "NoLoginProof": "You will use this app to prove who you are when you log in. (PT-BR)",
+    "Goto": "Go to (PT-BR)",
+    "NotListed": "Services not listed? (PT-BR)",
+    "NotListedDescription": "Services that are only available to specific people or people in specific professions are not listed above. (PR-BR)",
+    "NotListedDescriptionContact": "Contact the service to the the link to their website. (PR-BR)",
+    "PrivacyPolicy": "Privacy Policy (PT-BR)",
+    "LoginErrorTitle": "Unable to quick login to service (PT-BR)"
+  },
+  "Unified": {
+    "Steps": {
+      "ScanOrTakePhotos": "Scan or take photos of your ID. (PT-BR)",
+      "Step1": "Step 1 (PT-BR)",
+      "Step2": "Step 2 (PT-BR)",
+      "Step3": "Step 3 (PT-BR)",
+      "Step4": "Step 4 (PT-BR)"
+    },
+    "ChooseYourID": {
+      "WhatCardDoYou": "What BC Services Card do you have? (PT-BR)",
+      "SomePeopleStillCallIt": "Some people still call it a CareCard or a Health Card. It has your personal health number (PHN) on the back. (PT-BR)",
+      "CombinedCard": "Combined card (PT-BR)",
+      "CombinedCardActionText": "It's combined with my driver's licence (PT-BR)",
+      "CombinedCardDescription": "Use this card for a faster way to set up the app. (PT-BR)",
+      "PhotoCard": "Photo card (PT-BR)",
+      "PhotoCardActionText": "A card with my photo (PT-BR)",
+      "PhotoCardDescription": "Use this card for a faster way to set up the app. (PT-BR)",
+      "NoPhotoCard": "Non photo card (PT-BR)",
+      "NoPhotoCardActionText": "A card without a photo (PT-BR)",
+      "NoPhotoCardDescription": "Use this card + photo ID to set up the app. (PT-BR)",
+      "DontHaveOne": "Don't have one? (PT-BR)",
+      "CheckBefore": "Check before you continue. It's faster to set up with one of the above. (PT-BR)",
+      "CheckForServicesCard": "Check for BC Services Card (PT-BR)",
+      "CheckIfIHave": "Check if I have a BC Services Card (PT-BR)",
+      "OtherID": "Other ID (PT-BR)",
+      "OtherIDActionText": "Set up with other ID (PT-BR)",
+      "OtherIDDescription": "This option takes the longest to set up. You'll need 2 IDs to set up the app and have limited access to services. (PT-BR)",
+    },
+    "Instructions": {
+      "Heading": "Provide the card serial number on the back right side of your card. (PT-BR)",
+      "Paragraph": "When scanning, you should place the card in front of a white background for best results. (PT-BR)",
+      "ScanBarcode": "Scan Barcode with Camera (PT-BR)",
+      "EnterManually": "Enter Serial Number Manually (PT-BR)",
+    },
+    "Scan": {},
+    "ManualSerial": {
+      "InputLabel": "Serial number (PT-BR)",
+      "InputSubText": "Enter the letter and numbers by the barcode on the back of your card. (PT-BR)",
+      "EmptySerialError": "Required (PT-BR)",
+      "CharCountError": "Cannot exceed 15 characters (PT-BR)",
+    },
+    "Birthdate": {
+      "CardSerialNumber": "Card serial number: {{ serial }} (PT-BR)",
+      "Heading": "Enter your birthdate (PT-BR)",
+      "Paragraph": "Your birthdate is only used to to set up this app. It is not shared. (PT-BR)",
+      "InputLabel": "Birthdate (PT-BR)",
+    },
+    "AdditionalEvidence": {
+      "Heading": "Additional ID required (PT-BR)",
+      "PhotoRequired": "You must provide additional ID because your BC Services Card doesn't have a photo on it. (PT-BR)",
+      "PhotoRequiredDescription": "It's needed to verify your identity. You'll be asked to provide one or two government-issued IDs. (PT-BR)",
+      "CheckYourID": "Check your ID (PT-BR)",
+      "CheckYourIDBullet1": "Has the same name as on your BC Services Card (PT-BR)",
+      "CheckYourIDBullet2": "Has a recent photo (PT-BR)",
+      "CheckYourIDBullet3": "Is not expired (PT-BR)",
+      "LimitedAccess": "Limited access to services (PT-BR)",
+      "LimitedAccessDescription": "Some services only accept the app when it's set up with a BC Services Card with a photo. (PT-BR)",
+      "ChooseID": "Choose ID (PT-BR)",
+    },
+    "DualNonBCSCEvidence": {
+      "Heading": "You must provide two government-issued IDs (PT-BR)",
+      "Description": "It's needed to verify your identity. (PT-BR)",
+      "CheckYourID": "Check your IDs (PT-BR)",
+      "CheckYourIDBullet1": "Both IDs should have the same name (PT-BR)",
+      "CheckYourIDBullet2": "At least one must be issued in Canada (PT-BR)",
+      "CheckYourIDBullet3": "One must have a recent photo (PT-BR)",
+      "CheckYourIDBullet4": "Both must not be expired (PT-BR)",
+    },
+    "IDPhotoInformation": {
+      "Heading": "Take a photo of your ID. An agent will look at this photo when verifying your identity. (PT-BR)",
+      "IDPhotoInstructionsBullet1": "Center your ID within the frame (PT-BR)",
+      "IDPhotoInstructionsBullet2": "Have no other objects in the photo (PT-BR)",
+      "IDPhotoInstructionsBullet3": "Make sure the entire ID is visible (PT-BR)",
+      "IDPhotoInstructionsBullet4": "Make sure the image is clear without any glare or shadows (PT-BR)",
+      "TakePhoto": "Take photo of ID (PT-BR)",
+    },
+    "EvidenceTypeList": {
+      "Heading": "Choose photo ID (PT-BR)",
+      "Description": "Use an ID that has the same name as on your BC Services Card. (PT-BR)",
+      "NonBCSCDescription": "Use an ID that has the same name as your first ID. (PT-BR)",
+      "FirstID": "Choose your first ID (PT-BR)",
+      "SecondID": "Choose your second ID (PT-BR)"
+    },
+    "EvidenceIDCollection": {
+      "DocumentNumberSubtext": "For example: (PT-BR)",
+      "DocumentNumberError": "Please enter a valid document number (PT-BR)",
+
+      "FirstNameLabel": "First name (PT-BR)",
+      "FirstNameSubtext": "Your first given name (PT-BR)",
+      "FirstNameError": "Please enter a first name (PT-BR)",
+
+      "LastNameLabel": "Last name (PT-BR)",
+      "LastNameError": "Please enter a last name (PT-BR)",
+      "LastNameSubtext": "Also known as surname or family name (PT-BR)",
+
+      "BirthDateLabel": "Birth date (PT-BR)",
+      "BirthDateSubtext": "Enter your birth date in YYYY-MM-DD format (PT-BR)",
+      "BirthDateError": "Please enter a valid birth date (YYYY-MM-DD) (PT-BR)",
+
+      "MiddleNamesLabel": "Middle names (PT-BR)",
+      "MiddleNamesSubtext": "Additional given names. Only up to 2 are needed (PT-BR)",
+      "MiddleNamesError": "Please enter up to two middle names (PT-BR)",
+    },
+    "Address": {
+      "Heading": "Address (PT-BR)",
+      "Paragraph": "Enter the address of where you live. (PT-BR)",
+
+      "StreetAddressLabel": "Street Line 1 (PT-BR)",
+      "StreetAddressSubtext": "Your residential street address (PT-BR)",
+      "StreetAddressRequired": "Please enter a street address (PT-BR)",
+
+      "CityLabel": "City (PT-BR)",
+      "CitySubtext": "The city of your current address (PT-BR)",
+      "CityRequired": "Please enter a city (PT-BR)",
+
+      "ProvinceLabel": "Province or Territory (PT-BR)",
+      "ProvinceSubtext": "Province or territory. For example, BC or British Columbia (PT-BR)",
+      "ProvinceInvalid": "Please enter a valid Canadian province or territory (PT-BR)",
+
+      "PostalCodeLabel": "Postal Code (PT-BR)",
+      "PostalCodeSubtext": "Your postal code in format A1A 2B2 (PT-BR)",
+      "PostalCodeInvalid": "Please enter a valid postal code in A1A 2B2 format (PT-BR)"
+    },
+    "Account": {
+      "RemoveAccount": "Remove account (PT-BR)",
+      "RemoveAccountTitle": "Remove account from this app? (PT-BR)",
+      "RemoveAccountParagraph": "To use this app again, you'll need to provide your ID and verify your identity. (PT-BR)"
+    },
+    "VideoTips": {
+      "PrivatePlace": "Find a private place to talk (PT-BR)",
+      "OnlyPerson": "Be the only person in the video (PT-BR)",
+      "RemoveGlasses": "Remove your glasses (if possible) (PT-BR)"
+    },
+    "VideoCall": {
+      "ServiceBC": "Service BC (PT-BR)",
+      "BeforeYouCallTitle": "Before you call (PT-BR)",
+      "WiFiRecommended": "Wi-Fi Recommended (PT-BR)",
+      "StandardDataCharges": "Standard data charges may apply for calls over a cellular network. (PT-BR)",
+      "CellularNetworkWarning": "The app detected you're on a cellular network. (PT-BR)",
+      "FindPrivatePlace": "Find a Private Place to Talk (PT-BR)",
+      "MakeSureOnlyYou": "Make sure you'll be the only person in the video. (PT-BR)",
+      "HoursOfService": "Hours of Service (PT-BR)",
+      "DefaultHours": "Monday to Friday\n7:30am - 5:00pm Pacific Time (PT-BR)",
+      "ContactCentrePrivacy": "Contact Centre Privacy (PT-BR)",
+      "PrivacyNotice": "During a video call, Service BC will ask for and collect personal information. The personal information you will provide is collected for the purpose of verification of your BC Services Card. This information is collected under the authority of Section 26(c) and 26(e) of the Freedom of Information and Protection of Privacy Act (FIPPA). (PT-BR)",
+      "PrivacyContactInfo": "If you have further questions about privacy, please contact Chief Privacy Officer, 100 - 722 Johnson Street, Victoria, BC, V8W 1N1, or by phone\n250-405-3726 (PT-BR)",
+      "Assistance": "Need assistance? (PT-BR)",
+      "StartVideoCallDescription": "Start a video call with a Service BC agent. They will verify your identity to finish setting up this app. (PT-BR)",
+      "YouShould": "You should: (PT-BR)",
+      "StartCall": "Start call (PT-BR)",
+      "StartVideoCall": "Start video call (PT-BR)",
+      "OneMomentPlease": "One moment please... (PT-BR)",
+      "SettingThingsUp": "We're setting things up for you (PT-BR)",
+      "TakingLongerThanUsual": "This is taking longer than usual. Please be patient. (PT-BR)",
+      "CreatingSession": "Creating video session... (PT-BR)",
+      "ConnectingWebRTC": "Connecting to video service... (PT-BR)",
+      "WaitingForAgent": "Waiting for an agent to join... (PT-BR)",
+      "Initializing": "Initializing... (PT-BR)",
+      "ConnectionError": "Connection Error (PT-BR)",
+      "GenericError": "An error occurred (PT-BR)",
+      "TryAgain": "Try Again (PT-BR)",
+      "GoBack": "Go Back (PT-BR)",
+      "AllAgentsBusy": "All agents are busy (PT-BR)",
+      "CallUsLater": "Call us later (PT-BR)",
+      "AllAgentsBusyMessage": "We're sorry your call couldn't be answered. All of our agents are busy at the moment. Please call us back during our hours of service. (PT-BR)",
+      "CurrentlyClosedMessage": "We are currently closed. To talk to one of our agents to verify by video, call us during our hours of service. (PT-BR)",
+      "Reminder": "Reminder (PT-BR)",
+      "AddCardAgainReminder": "You'll need to add your card again if you don't finish verifying by {{date}}. (PT-BR)",
+      "SendVideoInstead": "Send video instead (PT-BR)",
+      "CallStates": {
+        "CreatingSession": "Creating video session... (PT-BR)",
+        "ConnectingWebRTC": "Connecting to video service... (PT-BR)",
+        "WaitingForAgent": "Waiting for an agent to join... (PT-BR)",
+        "Initializing": "Initializing... (PT-BR)",
+        "CallEnded": "Call ended, checking verification... (PT-BR)"
+      },
+      "Loading": {
+        "OneMomentPlease": "One moment please... (PT-BR)",
+        "SettingThingsUp": "We're setting things up for you (PT-BR)",
+        "TakingLongerThanUsual": "This is taking longer than usual. Please be patient. (PT-BR)",
+        "Cancel": "Cancel (PT-BR)"
+      },
+      "Banners": {
+        "VideoWillResume": "Video will resume when you return to this app (PT-BR)",
+        "AgentCantSeeYou": "Agent can't see you while your video is off (PT-BR)",
+        "AgentCantHearYou": "Agent can't hear you while your microphone is muted (PT-BR)",
+        "VolumeLow": "Your volume is low, you may need to turn it up to hear the agent (PT-BR)"
+      },
+      "Errors": {
+        "ConnectionError": "Connection Error (PT-BR)",
+        "ConnectionTimeout": "Connection to video service timed out. (PT-BR)",
+        "ConnectionFailed": "Failed to establish video connection. (PT-BR)",
+        "SessionFailed": "Service is unavailable. (PT-BR)",
+        "CallFailed": "Failed to initiate video call. (PT-BR)",
+        "NetworkError": "Network connection is unavailable. (PT-BR)",
+        "PermissionDenied": "Camera or microphone access was denied. (PT-BR)",
+        "UnexpectedError": "An unexpected error occurred. (PT-BR)",
+        "GenericError": "An error occurred (PT-BR)",
+        "TryAgain": "Try Again (PT-BR)",
+        "GoBack": "Go Back (PT-BR)"
+      },
+      "CallBusyOrClosed": {
+        "AllAgentsBusy": "All agents are busy (PT-BR)",
+        "CallUsLater": "Call us later (PT-BR)",
+        "AllAgentsBusyMessage": "We're sorry your call couldn't be answered. All of our agents are busy at the moment. Please call us back during our hours of service. (PT-BR)",
+        "CurrentlyClosedMessage": "We are currently closed. To talk to one of our agents to verify by video, call us during our hours of service. (PT-BR)",
+        "HoursOfService": "Hours of Service (PT-BR)",
+        "Reminder": "Reminder (PT-BR)",
+        "AddCardAgainReminder": "You'll need to add your card again if you don't finish verifying by {{date}}. (PT-BR)",
+        "SendVideoInstead": "Send video instead (PT-BR)"
+      },
+      "VerifyNotComplete": {
+        "Title": "Verify not complete (PT-BR)",
+        "NotVerifiedYet": "Your identity is not verified yet. (PT-BR)",
+        "HavingTrouble": "Having trouble? (PT-BR)",
+        "TroubleshootingTips": "If you are having issues with audio or video, try out the following tips. If you're still having trouble, call us. (PT-BR)",
+        "SendVideoInstead": "Send video instead (PT-BR)",
+        "TryAgain": "Try again (PT-BR)"
+      }
+    }
+  },
   "RemoteLogging": {
     "ScreenTitle": "Remote troubleshooting (PT-BR)",
     "Heading": "Collection notice (PT-BR)",
@@ -191,6 +468,13 @@ const translation = {
   },
   "Home":{
     "Welcome": "Instnt Multipass",
+  },
+  "AppUpdate": {
+    "Heading": "Update BC Wallet to the latest version (PT-BR)",
+    "Body": "BC Wallet was updated with new improvements. Update your app now to enjoy the latest features and enhancements. (PT-BR)",
+  },
+  "HelpCentre": {
+    "Title": "Help Centre (PT-BR)",
   }
 }
 

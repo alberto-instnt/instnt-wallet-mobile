@@ -1,3 +1,4 @@
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
 const fs = require('fs')
 const path = require('path')
 const escape = require('escape-string-regexp')
@@ -5,11 +6,12 @@ const exclusionList = require('metro-config/src/defaults/exclusionList')
 require('dotenv').config()
 
 const packageDirs = [
-  fs.realpathSync(path.join(__dirname, 'node_modules', '@hyperledger/aries-oca')),
-  fs.realpathSync(path.join(__dirname, 'node_modules', '@hyperledger/aries-bifold-remote-logs')),
-  fs.realpathSync(path.join(__dirname, 'node_modules', '@hyperledger/aries-bifold-core')),
-  fs.realpathSync(path.join(__dirname, 'node_modules', '@hyperledger/aries-bifold-verifier')),
-  fs.realpathSync(path.join(__dirname, 'node_modules', '@hyperledger/aries-react-native-attestation')),
+  fs.realpathSync(path.join(__dirname, 'node_modules', '@bifold/oca')),
+  fs.realpathSync(path.join(__dirname, 'node_modules', '@bifold/remote-logs')),
+  fs.realpathSync(path.join(__dirname, 'node_modules', '@bifold/core')),
+  fs.realpathSync(path.join(__dirname, 'node_modules', '@bifold/verifier')),
+  fs.realpathSync(path.join(__dirname, 'node_modules', '@bifold/react-native-attestation')),
+  fs.realpathSync(path.join(__dirname, 'node_modules', 'react-native-bcsc-core')),
 ]
 
 const watchFolders = [...packageDirs]
@@ -32,7 +34,6 @@ for (const packageDir of packageDirs) {
   }, extraNodeModules)
 }
 
-const { getDefaultConfig } = require('metro-config')
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
@@ -48,6 +49,21 @@ module.exports = (async () => {
           inlineRequires: process.env.LOAD_STORYBOOK !== 'true',
         },
       }),
+      minifierPath: 'metro-minify-terser',
+      minifierConfig: {
+        keep_classnames: true,
+        keep_fnames: true,
+        mangle: {
+          keep_classnames: true,
+          keep_fnames: true,
+        },
+        // Remove console logs from production
+        compress: {
+          drop_console: process.env.NODE_ENV === 'production',
+          drop_debugger: true,
+          pure_funcs: ['console.log'],
+        },
+      },
     },
     resolver: {
       blacklistRE: exclusionList(extraExclusionlist.map((m) => new RegExp(`^${escape(m)}\\/.*$`))),
@@ -58,5 +74,5 @@ module.exports = (async () => {
     watchFolders,
   }
 
-  return metroConfig
+  return mergeConfig(getDefaultConfig(__dirname), metroConfig)
 })()

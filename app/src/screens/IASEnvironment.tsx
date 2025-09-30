@@ -1,4 +1,4 @@
-import { useTheme, useStore, Button, ButtonType, testIdWithKey } from '@hyperledger/aries-bifold-core'
+import { useTheme, useStore, Button, ButtonType, testIdWithKey } from '@bifold/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
@@ -14,14 +14,14 @@ interface IASEnvironmentProps {
 
 const IASEnvironmentScreen: React.FC<IASEnvironmentProps> = ({ shouldDismissModal }) => {
   const { t } = useTranslation()
-  const { ColorPallet, TextTheme, SettingsTheme } = useTheme()
+  const { ColorPalette, TextTheme, SettingsTheme } = useTheme()
   const [store, dispatch] = useStore<BCState>()
 
   const environments = iasEnvironments
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: ColorPallet.brand.primaryBackground,
+      backgroundColor: ColorPalette.brand.primaryBackground,
       width: '100%',
     },
     section: {
@@ -36,7 +36,7 @@ const IASEnvironmentScreen: React.FC<IASEnvironmentProps> = ({ shouldDismissModa
     },
     itemSeparator: {
       borderBottomWidth: 1,
-      borderBottomColor: ColorPallet.brand.primaryBackground,
+      borderBottomColor: ColorPalette.brand.primaryBackground,
       marginHorizontal: 25,
     },
   })
@@ -51,22 +51,22 @@ const IASEnvironmentScreen: React.FC<IASEnvironmentProps> = ({ shouldDismissModa
   }
 
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={environments}
         renderItem={({ item: environment }) => {
           const { name }: IASEnvironment = environment
           return (
             <View style={[styles.section, styles.sectionRow]}>
-              <Text style={[TextTheme.title]}>{t(`Developer.${name}`)}</Text>
+              <Text style={TextTheme.title}>{t(`Developer.${name}`)}</Text>
               <BouncyCheckbox
                 accessibilityLabel={name}
                 disableText
                 fillColor="#FFFFFFFF"
                 unfillColor="#FFFFFFFF"
                 size={36}
-                innerIconStyle={{ borderColor: ColorPallet.brand.primary, borderWidth: 2 }}
-                ImageComponent={() => <Icon name="circle" size={18} color={ColorPallet.brand.primary}></Icon>}
+                innerIconStyle={{ borderColor: ColorPalette.brand.primary, borderWidth: 2 }}
+                ImageComponent={() => <Icon name="circle" size={18} color={ColorPalette.brand.primary}></Icon>}
                 onPress={() => {
                   handleEnvironmentChange(environment)
                 }}
@@ -79,7 +79,7 @@ const IASEnvironmentScreen: React.FC<IASEnvironmentProps> = ({ shouldDismissModa
         }}
         ItemSeparatorComponent={() => (
           <View style={{ backgroundColor: SettingsTheme.groupBackground }}>
-            <View style={[styles.itemSeparator]}></View>
+            <View style={styles.itemSeparator}></View>
           </View>
         )}
       />
