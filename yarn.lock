@@ -4531,7 +4531,7 @@ __metadata:
 
 "@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/app/patches/@hyperledger+aries-bifold-core+1.0.0-alpha.215.patch":
   version: 1.0.0-alpha.215
-  resolution: "@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/app/patches/@hyperledger+aries-bifold-core+1.0.0-alpha.215.patch::version=1.0.0-alpha.215&hash=ac91ff"
+  resolution: "@hyperledger/aries-bifold-core@patch:@hyperledger/aries-bifold-core@npm%3A1.0.0-alpha.215#~/app/patches/@hyperledger+aries-bifold-core+1.0.0-alpha.215.patch::version=1.0.0-alpha.215&hash=cf2f64"
   peerDependencies:
     "@aries-framework/anoncreds": ^0.4.0
     "@aries-framework/anoncreds-rs": ^0.4.0
@@ -4603,7 +4603,7 @@ __metadata:
     uuid: ^9.0.0
   bin:
     bifold: bin/bifold
-  checksum: ea61e94b60ecd19d9c7189099420bb1d2fac4a771710f79f74ba642b8c8ad1041b83c2b9a51b16c871206b465430618df3e144e3269d0d155297fba5597efd20
+  checksum: b04027c8046773c7002e1c66462b34785736f18363c3aecda743f33315a3fc426b1cd7aeee53d65e49e0848675e9362c1fda70f0bf48f27ed156c15c742253ec
   languageName: node
   linkType: hard
 

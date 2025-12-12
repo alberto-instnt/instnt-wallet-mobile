@@ -1,0 +1,12 @@
+diff --git a/node_modules/@aries-framework/core/build/utils/parseInvitation.js b/node_modules/@aries-framework/core/build/utils/parseInvitation.js
+index 39e79e8..83dc090 100644
+--- a/node_modules/@aries-framework/core/build/utils/parseInvitation.js
++++ b/node_modules/@aries-framework/core/build/utils/parseInvitation.js
+@@ -34,6 +34,7 @@ const fetchShortUrl = async (invitationUrl, dependencies) => {
+             headers: {
+                 Accept: 'application/json',
+                 'Content-Type': 'application/json',
++                'Origin': 'https://wallet.instnt.org',
+             },
+         });
+     }
