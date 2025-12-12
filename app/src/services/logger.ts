@@ -307,6 +307,7 @@ export class AppConsoleLogger implements Logger {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://wallet.instnt.org',
       },
       mode: 'cors',
       body: JSON.stringify(logs),
